@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="navPane" styleClass="border-pane-nav" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.java.controllers.MainController">
+   <left>
+      <VBox maxWidth="180.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" styleClass="heading" text="Hospital Management" textOverrun="CLIP" wrapText="true">
+               <padding>
+                  <Insets bottom="30.0" left="20.0" right="20.0" top="30.0" />
+               </padding>
+            </Label>
+            <Button alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleShowView" styleClass="nav_btn" text="Add Patient" userData="../../resources/views/form.fxml">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <padding>
+                  <Insets bottom="15.0" left="20.0" top="15.0" />
+               </padding></Button>
+            <Button alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleShowView" styleClass="nav_btn" text="All Patients" userData="../../resources/views/allPatients.fxml">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <padding>
+                  <Insets bottom="15.0" left="20.0" top="15.0" />
+               </padding></Button>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </VBox>
+   </left>
+</BorderPane>

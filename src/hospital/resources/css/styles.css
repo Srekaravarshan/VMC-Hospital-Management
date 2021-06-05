@@ -1,0 +1,151 @@
+.nav_btn {
+	-fx-background-color: #fdfdfd;
+	-fx-text-fill: #06051f;
+}
+/* 
+.nav_btn:last-child {
+    -fx-border-bottom: none;
+} */
+
+.v-box_right,
+.scroll-pane_nav {
+	-fx-background-color: white;
+}
+
+.nav_btn:hover {
+	-fx-background-color: #f3f3f3;
+}
+
+.heading {
+	-fx-text-fill: #030064;
+	-fx-font-size: 20px;
+	-fx-font-weight: bold;
+}
+
+.primary_btn {
+	-fx-background-color: #1b5afd;
+	-fx-text-fill: white;
+	-fx-font-weight: bold;
+	-fx-border-radius: 10px;
+}
+
+.secondary_btn {
+	-fx-background-color: #edf1fb;
+	-fx-text-fill: black;
+	-fx-font-weight: bold;
+	-fx-border-radius: 10px;
+}
+
+.text-field {
+	-fx-background-color: white;
+	-fx-border-color: #f0f0f0;
+	-fx-border-radius: 4px;
+	-fx-font-size: 15px;
+}
+
+.text-field_label {
+	-fx-font-size: 14px;
+	-fx-text-fill: #090739;
+	-fx-font-weight: bold;
+	-fx-margin-bottom: 5px;
+}
+
+.error-text {
+	-fx-text-fill: rgb(255, 78, 78);
+}
+
+.border-pane-nav {
+	/* -fx-background-color: #f5f4ff; */
+	-fx-background-color: #fcfcfc;
+}
+
+.add-edit_btn {
+	/* -fx-background-color: #f5f4ff; */
+	-fx-background-color: white;
+	-fx-border-radius: 4px;
+	-fx-border-width: 2px;
+	-fx-border-color: #e3e4f0;
+	-fx-border-style: dashed;
+	-fx-font-weight: bold;
+	/* -fx-border-color: #f0f0f0; */
+}
+
+.add-edit_btn:hover {
+	/* -fx-background-color: #f5f4ff; */
+	-fx-background-color: #1bd3fc;
+	-fx-border-radius: 4px;
+	-fx-border-width: 2px;
+	-fx-text-fill: white;
+	-fx-border-color: #1bd3fc;
+	/* -fx-border-style: dashed; */
+	-fx-font-weight: bold;
+	/* -fx-border-color: #f0f0f0; */
+}
+
+.remove_btn {
+	/* -fx-background-color: #f5f4ff; */
+	-fx-background-color: rgb(255, 78, 78);
+	-fx-border-radius: 4px;
+	-fx-border-width: 2px;
+	-fx-text-fill: white;
+	-fx-font-weight: bold;
+	-fx-border-color: rgb(255, 78, 78);
+	/* -fx-border-color: #f0f0f0; */
+}
+
+.remove_btn:hover {
+	/* -fx-background-color: #f5f4ff; */
+	-fx-background-color: white;
+	-fx-border-radius: 4px;
+	-fx-border-width: 2px;
+	-fx-text-fill: rgb(255, 78, 78);
+	-fx-font-weight: bold;
+	-fx-border-style: dashed;
+	/* -fx-border-color: rgb(255, 78, 78); */
+	-fx-border-color: rgb(255, 78, 78);
+}
+
+.patient_details {
+	-fx-background-color: #fff;
+	-fx-border-color: transparent;
+	-fx-focus-color: transparent;
+	-fx-text-box-border: transparent;
+}
+
+.patient_list {
+	-fx-focus-color: transparent;
+	-fx-text-box-border: transparent;
+	-fx-border-color: transparent;
+}
+
+.list-view {
+	-fx-background-insets: 0;
+	-fx-padding: 0;
+	/* -fx-background-radius: 20px; */
+}
+
+.cell:filled:selected:focused,
+.cell:filled:selected {
+	/* 3:, 4: */
+	/* -fx-border-radius: 20px; */
+	-fx-background-color: #1b5afd;
+	-fx-text-fill: white;
+}
+.cell {
+	/* -fx-border-radius: 20px; */
+	-fx-text-fill: #06051f;
+	-fx-font-weight: bold; /* 5 */
+	/* -fx-border-radius: 6px; */
+}
+.cell:even {
+	-fx-background-color: #edf1fb;
+	/* -fx-background-color: #f3f3f3; for information */
+}
+
+.cell:odd {
+	-fx-background-color: white; /* for information */
+}
+/* .cell:filled:hover {
+	-fx-background-color: #00f; /* 2 */
+/* -fx-text-fill: white;
+} */

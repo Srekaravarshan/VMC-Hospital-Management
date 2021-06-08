@@ -161,8 +161,11 @@ public class AllPatientsController {
             Task<Boolean> task = new Task<>() {
                 @Override
                 protected Boolean call() throws Exception {
-                    int id = Datasource.instance.insertPatient(patient.getName(), patient.getAddress(),
-                            patient.getFatherName(), patient.getMotherName());
+                    int id = Datasource.instance.insertPatient(patient.getName(), patient.getUHID(), patient.getAge(),
+                    patient.getSex(), patient.getRiskFactors(), patient.getOtherComorbidities(),
+                    patient.getCad(), patient.getTreatmentForPastCad(), patient.getEcho(),
+                    patient.getCurrentDiagnosis(), patient.getCoronaryAngiography(), patient.getPci(),
+                    patient.getComplicationsInHospitalPredischarge(), patient.getPostPci());
                     patient.setId(id);
                     return true;
                 }
@@ -243,10 +246,19 @@ public class AllPatientsController {
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 Patient editedPatient = controller.processResults();
                 patient.setName(editedPatient.getName());
-                patient.setId(editedPatient.getId());
-                patient.setAddress(editedPatient.getAddress());
-                patient.setFatherName(editedPatient.getFatherName());
-                patient.setMotherName(editedPatient.getMotherName());
+                patient.setUHID(editedPatient.getUHID());
+                patient.setAge(editedPatient.getAge());
+                patient.setSex(editedPatient.getSex());
+                patient.setRiskFactors(editedPatient.getRiskFactors());
+                patient.setOtherComorbidities(editedPatient.getOtherComorbidities());
+                patient.setCad(editedPatient.getCad());
+                patient.setTreatmentForPastCad(editedPatient.getTreatmentForPastCad());
+                patient.setEcho(editedPatient.getEcho());
+                patient.setCurrentDiagnosis(editedPatient.getCurrentDiagnosis());
+                patient.setCoronaryAngiography(editedPatient.getCoronaryAngiography());
+                patient.setPci(editedPatient.getPci());
+                patient.setComplicationsInHospitalPredischarge(editedPatient.getComplicationsInHospitalPredischarge());
+                patient.setPostPci(editedPatient.getPostPci());
                 patient.setId(patientId);
 
                 Task<Boolean> task = new Task<>() {

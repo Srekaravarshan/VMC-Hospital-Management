@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DialogPane?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -8,51 +10,126 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<DialogPane prefHeight="400.0" prefWidth="300.0" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.java.controllers.AddPatientDialogController">
+<DialogPane prefHeight="600.0" prefWidth="1000.0" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.java.controllers.AddPatientDialogController">
     <content>
-        <GridPane hgap="10" vgap="10">
-            <VBox GridPane.columnIndex="0" GridPane.rowIndex="0">
-                <children>
-                    <Label text="Name" />
-                    <TextField fx:id="nameField" />
-                    <Label fx:id="nameError" />
-                </children>
-            </VBox>
-            <VBox GridPane.columnIndex="0" GridPane.rowIndex="1">
-                <children>
-                    <Label text="Roll Number" />
-                    <TextField fx:id="rollNumField" />
-                    <Label fx:id="rollNumError" />
-                </children>
-            </VBox>
-            <VBox GridPane.columnIndex="0" GridPane.rowIndex="2">
-                <children>
-                    <Label text="Address" />
-                    <TextField fx:id="addressField" />
-                </children>
-            </VBox>
-            <VBox GridPane.columnIndex="0" GridPane.rowIndex="3">
-                <children>
-                    <Label text="Father's Name" />
-                    <TextField fx:id="fatherNameField" />
-                </children>
-            </VBox>
-            <VBox GridPane.columnIndex="0" GridPane.rowIndex="4">
-                <children>
-                    <Label text="Mother's Name" />
-                    <TextField fx:id="motherNameField" />
-                </children>
-            </VBox>
-         <columnConstraints>
-            <ColumnConstraints />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-         </rowConstraints>
-        </GridPane>
+        <GridPane alignment="CENTER" hgap="40.0" minHeight="-Infinity" minWidth="-Infinity" prefWidth="623.0" styleClass="v-box_right" vgap="40.0">
+            <columnConstraints>
+               <ColumnConstraints hgrow="SOMETIMES" maxWidth="330.0" minWidth="297.0" prefWidth="297.0" />
+               <ColumnConstraints hgrow="SOMETIMES" maxWidth="298.0" minWidth="270.0" prefWidth="293.0" />
+            </columnConstraints>
+            <rowConstraints>
+               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+               <VBox>
+                  <children>
+                     <Label styleClass="text-field_label" text="Name">
+                        <VBox.margin>
+                           <Insets />
+                        </VBox.margin>
+                  </Label>
+                     <TextField fx:id="nameField" promptText="Eg. Robertson" />
+                     <Label fx:id="nameError" styleClass="error-text">
+                        <VBox.margin>
+                           <Insets left="10.0" />
+                        </VBox.margin>
+                  </Label>
+                  </children>
+               </VBox>
+               <VBox GridPane.columnIndex="1">
+                  <children>
+                     <Label styleClass="text-field_label" text="UHID" />
+                     <TextField fx:id="uhidField" promptText="Eg. 268231020027" />
+                     <Label fx:id="uhidError" styleClass="error-text">
+                        <VBox.margin>
+                           <Insets left="10.0" />
+                        </VBox.margin>
+                  </Label>
+                  </children>
+               </VBox>
+               <VBox GridPane.rowIndex="1">
+                  <children>
+                     <Label styleClass="text-field_label" text="Age" />
+                     <TextField fx:id="ageField" promptText="Eg. 18" />
+                  </children>
+               </VBox>
+               <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
+                  <children>
+                     <Label styleClass="text-field_label" text="Risk Factors" />
+                     <ComboBox fx:id="riskFactorsBox" maxWidth="1.7976931348623157E308" />
+                  </children>
+               </VBox>
+               <VBox layoutX="10.0" layoutY="129.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <children>
+                     <Label styleClass="text-field_label" text="Sex" />
+                     <TextField fx:id="sexField" promptText="Eg. Male" />
+                  </children>
+               </VBox>
+               <VBox layoutX="10.0" layoutY="203.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <children>
+                     <Label styleClass="text-field_label" text="Other Comorbidities" />
+                     <ComboBox fx:id="otherComorbiditiesBox" maxWidth="1.7976931348623157E308" />
+                  </children>
+               </VBox>
+               <VBox layoutX="347.0" layoutY="203.0" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="3">
+                  <children>
+                     <Label styleClass="text-field_label" text="Past h/o CAD" />
+                     <ComboBox fx:id="pastCadBox" maxWidth="1.7976931348623157E308" />
+                  </children>
+               </VBox>
+               <VBox layoutX="347.0" layoutY="203.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <children>
+                     <Label styleClass="text-field_label" text="Treatment for past CAD" />
+                     <ComboBox fx:id="treatmentForPastCadBox" maxWidth="1.7976931348623157E308" />
+                  </children>
+               </VBox>
+               <VBox layoutX="347.0" layoutY="273.0" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="4">
+                  <children>
+                     <Label styleClass="text-field_label" text="Echo" />
+                     <ComboBox fx:id="echoBox" maxWidth="1.7976931348623157E308" />
+                  </children>
+               </VBox>
+               <VBox layoutX="10.0" layoutY="343.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                  <children>
+                     <Label styleClass="text-field_label" text="Current diagnosis" />
+                     <ComboBox fx:id="currentDiagnosisBox" maxWidth="1.7976931348623157E308" />
+                  </children>
+               </VBox>
+               <VBox layoutX="347.0" layoutY="343.0" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="5">
+                  <children>
+                     <Label styleClass="text-field_label" text="Coronary Angiography" />
+                     <ComboBox fx:id="coronaryAngiographyBox" maxWidth="1.7976931348623157E308" />
+                  </children>
+               </VBox>
+               <VBox layoutX="10.0" layoutY="413.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                  <children>
+                     <Label styleClass="text-field_label" text="PCI" />
+                     <ComboBox fx:id="pciBox" maxWidth="1.7976931348623157E308" />
+                  </children>
+               </VBox>
+               <VBox layoutX="347.0" layoutY="413.0" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="6">
+                  <children>
+                     <Label styleClass="text-field_label" text="Complications in hospital Predischarge" />
+                     <ComboBox fx:id="complicationsPredischargeBox" maxWidth="1.7976931348623157E308" />
+                  </children>
+               </VBox>
+               <VBox layoutX="10.0" layoutY="483.0" prefHeight="200.0" prefWidth="286.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                  <children>
+                     <Label styleClass="text-field_label" text="Post PCI" />
+                     <ComboBox fx:id="postPciBox" maxWidth="1.7976931348623157E308" prefWidth="286.0" />
+                  </children>
+               </VBox>
+            </children>
+            <padding>
+               <Insets top="60.0" />
+            </padding>
+         </GridPane>
     </content>
 </DialogPane>

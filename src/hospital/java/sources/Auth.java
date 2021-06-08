@@ -7,7 +7,6 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Properties;
-import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
 import javax.crypto.BadPaddingException;
@@ -22,43 +21,43 @@ public class Auth {
     private final static String EMAIL = "email";
     private final static String ID = "id";
 
-    public static boolean isLoggedIn() {
-        try {
-            if (Preferences.userRoot().nodeExists("Auth")) {
-                Preferences prefs = Preferences.userRoot().node("Auth");
-                return prefs.getBoolean(IS_LOGGED_IN, false);
-            } else {
-                return false;
-            }
-        } catch (BackingStoreException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
+    // public static boolean isLoggedIn() {
+    //     try {
+    //         if (Preferences.userRoot().nodeExists("Auth")) {
+    //             Preferences prefs = Preferences.userRoot().node("Auth");
+    //             return prefs.getBoolean(IS_LOGGED_IN, false);
+    //         } else {
+    //             return false;
+    //         }
+    //     } catch (BackingStoreException e) {
+    //         e.printStackTrace();
+    //         return false;
+    //     }
+    // }
 
-    public static void setUserData(String email, int id) {
-        Preferences prefs = Preferences.userRoot().node("Auth");
-        prefs.putBoolean(IS_LOGGED_IN, true);
-        prefs.put(EMAIL, email);
-        prefs.putInt(ID, id);
+    // public static void setUserData(String email, int id) {
+    //     Preferences prefs = Preferences.userRoot().node("Auth");
+    //     prefs.putBoolean(IS_LOGGED_IN, true);
+    //     prefs.put(EMAIL, email);
+    //     prefs.putInt(ID, id);
 
-        Usersource.instance.setEmail(email);
-        Usersource.instance.setId(id);
-    }
+    //     Usersource.instance.setEmail(email);
+    //     Usersource.instance.setId(id);
+    // }
 
-    public static void getUserData() {
-        try {
-            if (Preferences.userRoot().nodeExists("Auth")) {
-                Preferences prefs = Preferences.userRoot().node("Auth");
-                String email = prefs.get(EMAIL, null);
-                int id = prefs.getInt(ID, 0);
-                 Usersource.instance.setEmail(email);
-                 Usersource.instance.setId(id);
-            }
-        } catch (BackingStoreException e) {
-            e.printStackTrace();
-        }
-    }
+    // public static void getUserData() {
+    //     try {
+    //         if (Preferences.userRoot().nodeExists("Auth")) {
+    //             Preferences prefs = Preferences.userRoot().node("Auth");
+    //             String email = prefs.get(EMAIL, null);
+    //             int id = prefs.getInt(ID, 0);
+    //              Usersource.instance.setEmail(email);
+    //              Usersource.instance.setId(id);
+    //         }
+    //     } catch (BackingStoreException e) {
+    //         e.printStackTrace();
+    //     }
+    // }
 
     public static void logOut () {
         Preferences prefs = Preferences.userRoot().node("Auth");
@@ -137,7 +136,7 @@ public class Auth {
     }
 
     public static boolean matches (String password, String encryptedPassword) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException, IOException {
-        return decrypt(encryptedPassword) == password;
+        return decrypt(encryptedPassword).equals(password);
     }
 
 }

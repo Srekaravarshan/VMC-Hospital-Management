@@ -52,8 +52,8 @@ public class LoginController {
         }
 
         if (matches) {
-            Auth.setUserData(email_field.getText().trim(),
-                    Integer.valueOf(userData.get("id")));
+            // Auth.setUserData(email_field.getText().trim(),
+            //         Integer.valueOf(userData.get("id")));
 
             try {
                 Stage loginStage = (Stage) nav_register_btn.getScene().getWindow();

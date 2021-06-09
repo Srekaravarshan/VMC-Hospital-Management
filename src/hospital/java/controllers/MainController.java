@@ -1,15 +1,15 @@
 package hospital.java.controllers;
 
-import java.io.IOException;
-import java.net.URL;
-
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.util.Duration;
+
+import java.io.IOException;
+import java.net.URL;
 
 public class MainController {
 
@@ -21,7 +21,7 @@ public class MainController {
         PauseTransition delay = new PauseTransition(Duration.seconds(0.5));
         delay.setOnFinished(event -> {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../../resources/views/form.fxml"));
+                FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/hospital/resources/views/form.fxml"));
                 navPane.setCenter(loader.load());
             } catch (IOException e) {
                 e.printStackTrace();
@@ -30,12 +30,34 @@ public class MainController {
         delay.play();
     }
 
+//    @FXML
+//    private void logout() {
+//        Auth.logOut();
+//        Stage mainStage = (Stage) navPane.getScene().getWindow();
+//        Stage primaryStage = new Stage();
+////            URL fxmlLocation = getClass().getResource("resources/views/register.fxml");
+////            System.out.println(fxmlLocation.getPath());
+//        FXMLLoader loader = new FXMLLoader(LoginController.class.getResource("/hospital/resources/views/login.fxml"));
+////            System.out.println(Objects.requireNonNull(getClass().getResource("../../resources/views/register.fxml")).getPath());
+//        Parent root = null;
+//        try {
+//            root = loader.load();
+//        primaryStage.setTitle("Login");
+//        primaryStage.setScene(new Scene(root, 500, 600));
+//        primaryStage.getIcons().add(new Image(Objects.requireNonNull(LoginController.class.getResourceAsStream("/hospital/resources/images/logo.png"))));
+//        mainStage.close();
+//        primaryStage.show();
+//    } catch (IOException e) {
+//        e.printStackTrace();
+//    }
+//    }
+
     @FXML
     private void handleShowView(ActionEvent e) {
-        String view = (String) ((Node) e.getSource()).getUserData();
+        String view = (String) ((MenuItem) e.getSource()).getUserData();
         System.out.println(e.getSource());
         System.out.println(view);
-        loadFXML(getClass().getResource(view));
+        loadFXML(MainController.class.getResource(view));
     }
 
     private void loadFXML(URL url) {

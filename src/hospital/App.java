@@ -1,6 +1,5 @@
 package hospital;
 
-import hospital.java.sources.Auth;
 import hospital.java.sources.Datasource;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -9,23 +8,25 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import java.util.Objects;
+
 public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        if (Auth.isLoggedIn()) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("resources/views/main.fxml"));
-            Parent root = loader.load();
-            primaryStage.setTitle("Hospital Database");
-            primaryStage.setScene(new Scene(root, 1000, 600));
-        } else {
+//        if (Auth.isLoggedIn() || true) {
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource("resources/views/main.fxml"));
+//            Parent root = loader.load();
+//            primaryStage.setTitle("Hospital Database");
+//            primaryStage.setScene(new Scene(root, 1000, 600));
+//        } else {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("resources/views/login.fxml"));
             Parent root = loader.load();
             primaryStage.setTitle("Login");
             primaryStage.setScene(new Scene(root, 500, 600));
-        }
-        primaryStage.getIcons().add(new Image(App.class.getResourceAsStream("resources/images/logo.png")));
+//        }
+        primaryStage.getIcons().add(new Image(Objects.requireNonNull(App.class.getResourceAsStream("resources/images/logo.png"))));
         primaryStage.show();
     }
 

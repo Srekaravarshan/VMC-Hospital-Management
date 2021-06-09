@@ -1,15 +1,5 @@
 package hospital.java.controllers;
 
-import java.io.IOException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.sql.SQLException;
-import java.util.HashMap;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-
 import hospital.java.sources.Auth;
 import hospital.java.sources.Datasource;
 import javafx.fxml.FXML;
@@ -21,6 +11,16 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import java.io.IOException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Objects;
 
 public class LoginController {
 
@@ -40,6 +40,7 @@ public class LoginController {
             e.printStackTrace();
         }
 
+        assert userData != null;
         if (userData.get("enpass") == null) {
             return;
         }
@@ -52,25 +53,24 @@ public class LoginController {
         }
 
         if (matches) {
-            Auth.setUserData(email_field.getText().trim(),
-                    Integer.valueOf(userData.get("id")));
+//            Auth.setUserData(email_field.getText().trim(),
+//                    Integer.parseInt(userData.get("id")));
 
             try {
                 Stage loginStage = (Stage) nav_register_btn.getScene().getWindow();
                 Stage primaryStage = new Stage();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../../resources/views/main.fxml"));
+                FXMLLoader loader = new FXMLLoader(LoginController.class.getResource("/hospital/resources/views/main.fxml"));
                 Parent root = loader.load();
                 primaryStage.setTitle("Hospital Database");
-                primaryStage.setScene(new Scene(root, 500, 600));
-                primaryStage.getIcons().add(new Image(LoginController.class.getResourceAsStream("../../resources/images/logo.png")));
+                primaryStage.setScene(new Scene(root, 1000, 800));
+                primaryStage.getIcons().add(new Image(Objects.requireNonNull(LoginController.class.getResourceAsStream("/hospital/resources/images/logo.png"))));
                 loginStage.close();
                 primaryStage.show();
             } catch (IOException e) {
-                System.out.println(e.getLocalizedMessage());
-                System.out.println(e.getMessage());
-                System.out.println(e.toString());
                 e.printStackTrace();
             }
+        } else {
+            System.out.println("password does not match");
         }
     }
 
@@ -79,17 +79,14 @@ public class LoginController {
         try {
             Stage loginStage = (Stage) nav_register_btn.getScene().getWindow();
             Stage primaryStage = new Stage();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../resources/views/register.fxml"));
+            FXMLLoader loader = new FXMLLoader(LoginController.class.getResource("/hospital/resources/views/register.fxml"));
             Parent root = loader.load();
             primaryStage.setTitle("Register");
-            primaryStage.setScene(new Scene(root, 1000, 600));
-            primaryStage.getIcons().add(new Image(LoginController.class.getResourceAsStream("../../resources/images/logo.png")));
+            primaryStage.setScene(new Scene(root, 500, 600));
+            primaryStage.getIcons().add(new Image(Objects.requireNonNull(LoginController.class.getResourceAsStream("/hospital/resources/images/logo.png"))));
             loginStage.close();
             primaryStage.show();
         } catch (IOException e) {
-            System.out.println(e.getLocalizedMessage());
-            System.out.println(e.getMessage());
-            System.out.println(e.toString());
             e.printStackTrace();
         }
     }

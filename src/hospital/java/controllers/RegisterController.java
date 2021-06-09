@@ -1,15 +1,5 @@
 package hospital.java.controllers;
 
-import java.io.IOException;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.sql.SQLException;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-
 import hospital.java.models.User;
 import hospital.java.sources.Auth;
 import hospital.java.sources.Datasource;
@@ -22,6 +12,16 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import java.io.IOException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
+import java.util.Objects;
 
 public class RegisterController {
 
@@ -51,22 +51,22 @@ public class RegisterController {
             e.printStackTrace();
         }
 
-        Auth.setUserData(email_field.getText().trim(), user.getId());
+//        Auth.setUserData(email_field.getText().trim(), user.getId());
 
         try {
             Stage loginStage = (Stage) nav_login_btn.getScene().getWindow();
             Stage primaryStage = new Stage();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../resources/views/main.fxml"));
+            FXMLLoader loader = new FXMLLoader(RegisterController.class.getResource("/hospital/resources/views/main.fxml"));
             Parent root = loader.load();
             primaryStage.setTitle("Hospital Database");
-            primaryStage.setScene(new Scene(root, 1000, 600));
-            primaryStage.getIcons().add(new Image(RegisterController.class.getResourceAsStream("../../resources/images/logo.png")));
+            primaryStage.setScene(new Scene(root, 1000, 800));
+            primaryStage.getIcons().add(new Image(Objects.requireNonNull(RegisterController.class.getResourceAsStream("/hospital/resources/images/logo.png"))));
             loginStage.close();
             primaryStage.show();
         } catch (IOException e) {
             System.out.println(e.getLocalizedMessage());
             System.out.println(e.getMessage());
-            System.out.println(e.toString());
+            System.out.println(e);
             e.printStackTrace();
         }
 
@@ -77,17 +77,17 @@ public class RegisterController {
         try {
             Stage loginStage = (Stage) nav_login_btn.getScene().getWindow();
             Stage primaryStage = new Stage();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../resources/views/login.fxml"));
+            FXMLLoader loader = new FXMLLoader(RegisterController.class.getResource("/hospital/resources/views/login.fxml"));
             Parent root = loader.load();
             primaryStage.setTitle("Register");
             primaryStage.setScene(new Scene(root, 500, 600));
-            primaryStage.getIcons().add(new Image(RegisterController.class.getResourceAsStream("../../resources/images/logo.png")));
+            primaryStage.getIcons().add(new Image(Objects.requireNonNull(RegisterController.class.getResourceAsStream("/hospital/resources/images/logo.png"))));
             loginStage.close();
             primaryStage.show();
         } catch (IOException e) {
             System.out.println(e.getLocalizedMessage());
             System.out.println(e.getMessage());
-            System.out.println(e.toString());
+            System.out.println(e);
             e.printStackTrace();
         }
     }

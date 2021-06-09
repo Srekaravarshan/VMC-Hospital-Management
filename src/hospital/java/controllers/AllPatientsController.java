@@ -1,5 +1,8 @@
 package hospital.java.controllers;
 
+import hospital.java.models.Patient;
+import hospital.java.models.PatientData;
+import hospital.java.sources.Datasource;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -8,27 +11,20 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+import javax.print.*;
+import javax.print.event.PrintJobEvent;
+import javax.print.event.PrintJobListener;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
-
-import javax.print.DocPrintJob;
-import javax.print.PrintException;
-import javax.print.PrintServiceLookup;
-import javax.print.event.PrintJobListener;
-
-import hospital.java.models.Patient;
-import hospital.java.sources.Datasource;
-
-import javax.print.Doc;
-import javax.print.DocFlavor;
-import javax.print.PrintService;
-import javax.print.SimpleDoc;
-import javax.print.event.PrintJobEvent;
 
 public class AllPatientsController {
 
@@ -39,7 +35,7 @@ public class AllPatientsController {
     @FXML
     private TextField searchField;
     @FXML
-    private TextArea patientDetails;
+    private TableView<PatientData> patientDetails;
 
     @FXML
     private ContextMenu listContextMenu;
@@ -58,7 +54,50 @@ public class AllPatientsController {
         return patient.getName().toLowerCase().contains(searchText.toLowerCase());
     }
 
+    private void updateTableRow(Patient patient) {
+        if ( patient != null ) {
+            ArrayList<String> titles = new ArrayList<>(Arrays.asList(
+                    "Name", "UHID", "Age", "Sex", "Risk Factors", "Other Comorbidities",
+                    "Past h/o CAD", "Treatment for past CAD", "Echo", "Current Diagnosis", "Coronary Angiography",
+                    "PCI", "Complications In hospital Predischarge", "Post PCI"
+            ));
+            ArrayList<String> details = new ArrayList<>(Arrays.asList(
+                    patient.getName(),
+                    patient.getUHID(),
+                    String.valueOf(patient.getAge()),
+                    patient.getSex(),
+                    patient.getRiskFactors(),
+                    patient.getOtherComorbidities(),
+                    patient.getCad(),
+                    patient.getTreatmentForPastCad(),
+                    patient.getEcho(),
+                    patient.getCurrentDiagnosis(),
+                    patient.getCoronaryAngiography(),
+                    patient.getPci(),
+                    patient.getComplicationsInHospitalPredischarge(),
+                    patient.getPostPci()
+            ));
+
+            patientDetails.getItems().clear();
+            for (int row = 0; row < titles.size(); row++) {
+                patientDetails.getItems().add(new PatientData(titles.get(row), details.get(row)));
+            }
+        } else {
+            patientDetails.getItems().clear();
+        }
+        patientDetails.refresh();
+    }
+
     public void initialize() {
+
+        TableColumn<PatientData, String> column1 = new TableColumn<>("Title");
+        column1.setCellValueFactory(new PropertyValueFactory<>("title"));
+        TableColumn<PatientData, String> column2 = new TableColumn<>("Detail");
+        column2.setCellValueFactory(new PropertyValueFactory<>("detail"));
+
+        patientDetails.getColumns().add(column1);
+        patientDetails.getColumns().add(column2);
+
         listContextMenu = new ContextMenu();
         MenuItem deleteMenuItem = new MenuItem("Delete");
         deleteMenuItem.setOnAction(actionEvent -> deletePatient());
@@ -70,7 +109,7 @@ public class AllPatientsController {
         patientList.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             if (newValue != null && patientList.getSelectionModel().getSelectedItem() != null) {
                 Patient patient = patientList.getSelectionModel().getSelectedItem();
-                patientDetails.setText(Patient.getDetailsString(patient));
+                updateTableRow(patient);
             }
         });
 
@@ -79,7 +118,7 @@ public class AllPatientsController {
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredList.setPredicate(filterPredicate(newValue));
             if (filteredList.isEmpty()) {
-                patientDetails.setText("");
+                updateTableRow(null);
             } else {
                 patientList.getSelectionModel().selectFirst();
             }
@@ -128,7 +167,7 @@ public class AllPatientsController {
         dialog.initOwner(mainBorderPane.getScene().getWindow());
         dialog.setTitle("Add Patient");
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("../../resources/views/addPatientDialog.fxml"));
+        fxmlLoader.setLocation(AllPatientsController.class.getResource("/hospital/resources/views/addPatientDialog.fxml"));
 
         try {
             dialog.getDialogPane().setContent(fxmlLoader.load());
@@ -141,7 +180,7 @@ public class AllPatientsController {
         dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
 
         Stage dialogStage = (Stage) dialog.getDialogPane().getScene().getWindow();
-        dialogStage.getIcons().add(new Image(RegisterController.class.getResourceAsStream("../../resources/images/logo.png")));
+        dialogStage.getIcons().add(new Image(RegisterController.class.getResourceAsStream("/hospital/resources/images/logo.png")));
 
         final Button btnOK = (Button) dialog.getDialogPane().lookupButton(ButtonType.OK);
         btnOK.addEventFilter(ActionEvent.ACTION, event -> {
@@ -161,8 +200,12 @@ public class AllPatientsController {
             Task<Boolean> task = new Task<>() {
                 @Override
                 protected Boolean call() throws Exception {
-                    int id = Datasource.instance.insertPatient(patient.getName(), patient.getAddress(),
-                            patient.getFatherName(), patient.getMotherName());
+                    int id = Datasource.instance.insertPatient(patient.getName(), patient.getUHID(), patient.getAge(),
+                            patient.getSex(), patient.getRiskFactors(), patient.getOtherComorbidities(),
+                            patient.getCad(), patient.getTreatmentForPastCad(), patient.getEcho(),
+                            patient.getCurrentDiagnosis(), patient.getCoronaryAngiography(), patient.getPci(),
+                            patient.getComplicationsInHospitalPredischarge(), patient.getPostPci());
+                    patient.setId(id);
                     patient.setId(id);
                     return true;
                 }
@@ -191,7 +234,7 @@ public class AllPatientsController {
             alert.setContentText("Are you sure?  Press OK to confirm, or cancel to Back out.");
 
             Stage dialogStage = (Stage) alert.getDialogPane().getScene().getWindow();
-            dialogStage.getIcons().add(new Image(RegisterController.class.getResourceAsStream("../../resources/images/logo.png")));
+            dialogStage.getIcons().add(new Image(RegisterController.class.getResourceAsStream("/hospital/resources/images/logo.png")));
 
             Optional<ButtonType> result = alert.showAndWait();
 
@@ -223,7 +266,7 @@ public class AllPatientsController {
             dialog.initOwner(mainBorderPane.getScene().getWindow());
             dialog.setTitle("Edit Patient");
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("../../resources/views/addPatientDialog.fxml"));
+            fxmlLoader.setLocation(AllPatientsController.class.getResource("/hospital/resources/views/addPatientDialog.fxml"));
             
             try {
                 dialog.getDialogPane().setContent(fxmlLoader.load());
@@ -234,7 +277,7 @@ public class AllPatientsController {
             dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
             
             Stage dialogStage = (Stage) dialog.getDialogPane().getScene().getWindow();
-            dialogStage.getIcons().add(new Image(RegisterController.class.getResourceAsStream("../../resources/images/logo.png")));
+            dialogStage.getIcons().add(new Image(Objects.requireNonNull(RegisterController.class.getResourceAsStream("/hospital/resources/images/logo.png"))));
 
             AddPatientDialogController controller = fxmlLoader.getController();
             controller.setData(patient);
@@ -242,11 +285,21 @@ public class AllPatientsController {
             Optional<ButtonType> result = dialog.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 Patient editedPatient = controller.processResults();
+
                 patient.setName(editedPatient.getName());
-                patient.setId(editedPatient.getId());
-                patient.setAddress(editedPatient.getAddress());
-                patient.setFatherName(editedPatient.getFatherName());
-                patient.setMotherName(editedPatient.getMotherName());
+                patient.setUHID(editedPatient.getUHID());
+                patient.setAge(editedPatient.getAge());
+                patient.setSex(editedPatient.getSex());
+                patient.setRiskFactors(editedPatient.getRiskFactors());
+                patient.setOtherComorbidities(editedPatient.getOtherComorbidities());
+                patient.setCad(editedPatient.getCad());
+                patient.setTreatmentForPastCad(editedPatient.getTreatmentForPastCad());
+                patient.setEcho(editedPatient.getEcho());
+                patient.setCurrentDiagnosis(editedPatient.getCurrentDiagnosis());
+                patient.setCoronaryAngiography(editedPatient.getCoronaryAngiography());
+                patient.setPci(editedPatient.getPci());
+                patient.setComplicationsInHospitalPredischarge(editedPatient.getComplicationsInHospitalPredischarge());
+                patient.setPostPci(editedPatient.getPostPci());
                 patient.setId(patientId);
 
                 Task<Boolean> task = new Task<>() {
@@ -256,7 +309,7 @@ public class AllPatientsController {
                     }
                 };
 
-                patientDetails.setText(Patient.getDetailsString(patient));
+                updateTableRow(patient);
                 task.setOnSucceeded(e -> patientList.refresh());
 
                 new Thread(task).start();
@@ -268,7 +321,7 @@ public class AllPatientsController {
     @FXML
     private void listKeyPressed() {
         Patient patient = patientList.getSelectionModel().getSelectedItem();
-        patientDetails.setText(Patient.getDetailsString(patient));
+        updateTableRow(patient);
 
     }
 

@@ -53,8 +53,13 @@ public class LoginController {
         }
 
         if (matches) {
+<<<<<<< HEAD
 //            Auth.setUserData(email_field.getText().trim(),
 //                    Integer.parseInt(userData.get("id")));
+=======
+            // Auth.setUserData(email_field.getText().trim(),
+            //         Integer.valueOf(userData.get("id")));
+>>>>>>> 67117836d2a97fe10036dc06ddffb442394d1e9d
 
             try {
                 Stage loginStage = (Stage) nav_register_btn.getScene().getWindow();

@@ -11,6 +11,21 @@ import javafx.scene.control.TextField;
 
 import javax.print.*;
 import java.io.*;
+<<<<<<< HEAD
+=======
+import javax.print.DocPrintJob;
+import javax.print.PrintException;
+import javax.print.PrintServiceLookup;
+import javax.print.Doc;
+import javax.print.DocFlavor;
+import javax.print.PrintService;
+import javax.print.SimpleDoc;
+
+import hospital.java.models.Patient;
+import hospital.java.sources.Datasource;
+import hospital.java.sources.DropdownData;
+import javafx.concurrent.Task;
+>>>>>>> 67117836d2a97fe10036dc06ddffb442394d1e9d
 
 public class FormController {
 
@@ -33,6 +48,7 @@ public class FormController {
         pciBox.getItems().addAll(DropdownData.pciList);
         complicationsPredischargeBox.getItems().addAll(DropdownData.complicationsPredischargeList);
         postPciBox.getItems().addAll(DropdownData.postPsiList);
+<<<<<<< HEAD
     }
 
 
@@ -76,6 +92,48 @@ public Patient processResults() {
 
     return patient;
 }
+=======
+    }
+
+    public void setData(Patient patient) {
+        this.nameField.setText(patient.getName());
+    }
+
+    public Patient processResults() {
+        String name = nameField.getText().trim();
+        String uhid = uhidField.getText().trim();
+        String age = ageField.getText().trim();
+        String sex = sexField.getText().trim();
+        String riskFactors = riskFactorsBox.getSelectionModel().getSelectedItem();
+        String otherComorbidities = otherComorbiditiesBox.getSelectionModel().getSelectedItem();
+        String pastCad = pastCadBox.getSelectionModel().getSelectedItem();
+        String treatmentForPastCad = treatmentForPastCadBox.getSelectionModel().getSelectedItem();
+        String echo = echoBox.getSelectionModel().getSelectedItem();
+        String currentDiagnosis = currentDiagnosisBox.getSelectionModel().getSelectedItem();
+        String coronaryAngiography = coronaryAngiographyBox.getSelectionModel().getSelectedItem();
+        String pci = pciBox.getSelectionModel().getSelectedItem();
+        String complicationsPredischarge = complicationsPredischargeBox.getSelectionModel().getSelectedItem();
+        String postPci = postPciBox.getSelectionModel().getSelectedItem();
+
+        Patient patient = new Patient();
+        patient.setName(name);
+        patient.setUHID(uhid);
+        patient.setAge(Integer.valueOf(age));
+        patient.setSex(sex);
+        patient.setRiskFactors(riskFactors);
+        patient.setOtherComorbidities(otherComorbidities);
+        patient.setCad(pastCad);
+        patient.setTreatmentForPastCad(treatmentForPastCad);
+        patient.setEcho(echo);
+        patient.setCurrentDiagnosis(currentDiagnosis);
+        patient.setCoronaryAngiography(coronaryAngiography);
+        patient.setPci(pci);
+        patient.setComplicationsInHospitalPredischarge(complicationsPredischarge);
+        patient.setPostPci(postPci);
+        
+        return patient;
+    }
+>>>>>>> 67117836d2a97fe10036dc06ddffb442394d1e9d
 
     public boolean validate() {
         boolean isValid = true;
@@ -150,4 +208,3 @@ public Patient processResults() {
     }
 
 }
-

@@ -201,11 +201,18 @@ public class AllPatientsController {
                 @Override
                 protected Boolean call() throws Exception {
                     int id = Datasource.instance.insertPatient(patient.getName(), patient.getUHID(), patient.getAge(),
+<<<<<<< HEAD
                             patient.getSex(), patient.getRiskFactors(), patient.getOtherComorbidities(),
                             patient.getCad(), patient.getTreatmentForPastCad(), patient.getEcho(),
                             patient.getCurrentDiagnosis(), patient.getCoronaryAngiography(), patient.getPci(),
                             patient.getComplicationsInHospitalPredischarge(), patient.getPostPci());
                     patient.setId(id);
+=======
+                    patient.getSex(), patient.getRiskFactors(), patient.getOtherComorbidities(),
+                    patient.getCad(), patient.getTreatmentForPastCad(), patient.getEcho(),
+                    patient.getCurrentDiagnosis(), patient.getCoronaryAngiography(), patient.getPci(),
+                    patient.getComplicationsInHospitalPredischarge(), patient.getPostPci());
+>>>>>>> 67117836d2a97fe10036dc06ddffb442394d1e9d
                     patient.setId(id);
                     return true;
                 }

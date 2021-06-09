@@ -12,6 +12,7 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Properties;
+<<<<<<< HEAD
 
 public class Auth {
 
@@ -63,6 +64,66 @@ public class Auth {
 //        prefs.put(EMAIL, "");
 //        prefs.putInt(ID, 0);
 //    }
+=======
+import java.util.prefs.Preferences;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.SecretKeySpec;
+
+public class Auth {
+
+    private final static String IS_LOGGED_IN = "isLoggedIn";
+    private final static String EMAIL = "email";
+    private final static String ID = "id";
+
+    // public static boolean isLoggedIn() {
+    //     try {
+    //         if (Preferences.userRoot().nodeExists("Auth")) {
+    //             Preferences prefs = Preferences.userRoot().node("Auth");
+    //             return prefs.getBoolean(IS_LOGGED_IN, false);
+    //         } else {
+    //             return false;
+    //         }
+    //     } catch (BackingStoreException e) {
+    //         e.printStackTrace();
+    //         return false;
+    //     }
+    // }
+
+    // public static void setUserData(String email, int id) {
+    //     Preferences prefs = Preferences.userRoot().node("Auth");
+    //     prefs.putBoolean(IS_LOGGED_IN, true);
+    //     prefs.put(EMAIL, email);
+    //     prefs.putInt(ID, id);
+
+    //     Usersource.instance.setEmail(email);
+    //     Usersource.instance.setId(id);
+    // }
+
+    // public static void getUserData() {
+    //     try {
+    //         if (Preferences.userRoot().nodeExists("Auth")) {
+    //             Preferences prefs = Preferences.userRoot().node("Auth");
+    //             String email = prefs.get(EMAIL, null);
+    //             int id = prefs.getInt(ID, 0);
+    //              Usersource.instance.setEmail(email);
+    //              Usersource.instance.setId(id);
+    //         }
+    //     } catch (BackingStoreException e) {
+    //         e.printStackTrace();
+    //     }
+    // }
+
+    public static void logOut () {
+        Preferences prefs = Preferences.userRoot().node("Auth");
+        prefs.putBoolean(IS_LOGGED_IN, false);
+        prefs.put(EMAIL, null);
+        prefs.putInt(ID, 0);
+    }
+>>>>>>> 67117836d2a97fe10036dc06ddffb442394d1e9d
 
     public static final String AES = "AES";
 

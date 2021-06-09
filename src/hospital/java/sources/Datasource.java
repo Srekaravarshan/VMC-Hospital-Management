@@ -66,6 +66,7 @@ public class Datasource {
     public static final int INDEX_PATIENT_PCI = 13;
     public static final int INDEX_PATIENT_COMPLICATIONS_PREDESCRIPTION = 14;
     public static final int INDEX_PATIENT_POST_PCI = 15;
+<<<<<<< HEAD
 
 
     // CREATE TABLE patients ( _id INTEGER PRIMARY KEY, name TEXT NOT NULL, address TEXT, father_name TEXT, mother_name TEXT );
@@ -93,6 +94,8 @@ public class Datasource {
             COLUMN_USER_ID + " INTEGER PRIMARY KEY, " +
             COLUMN_USER_EMAIL + " TEXT UNIQUE NOT NULL, " +
             COLUMN_USER_PASS + " TEXT NOT NULL );";
+=======
+>>>>>>> 67117836d2a97fe10036dc06ddffb442394d1e9d
 
     // SELECT * FROM users WHERE user_id = '';
     private final String GET_USER_BY_EMAIL = "SELECT * FROM " + TABLE_USERS + " WHERE " + COLUMN_USER_EMAIL + " = ?";
@@ -107,9 +110,13 @@ public class Datasource {
     public static final String QUERY_PATIENTS = "SELECT * FROM " + TABLE_PATIENTS + " ORDER BY " + COLUMN_PATIENT_NAME
             + " COLLATE NOCASE";
 
+<<<<<<< HEAD
     // INSERT INTO patients (name, address, father_name, mother_name)
     // VALUES ( 'sre', 'Madurai', 'sre', 'sre')
     public static final String INSERT_PATIENT = "INSERT INTO " + TABLE_PATIENTS + " ("
+=======
+    public static final String INSERT_PATIENT = "INSERT INTO " + TABLE_PATIENTS + " (" 
+>>>>>>> 67117836d2a97fe10036dc06ddffb442394d1e9d
             + COLUMN_PATIENT_NAME + ", "
             + COLUMN_PATIENT_UHID + ", "
             + COLUMN_PATIENT_AGE + ", "
@@ -125,7 +132,10 @@ public class Datasource {
             + COLUMN_PATIENT_COMPLICATIONS_PREDESCRIPTION + ", "
             + COLUMN_PATIENT_POST_PCI
             + ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+<<<<<<< HEAD
 
+=======
+>>>>>>> 67117836d2a97fe10036dc06ddffb442394d1e9d
 
     // SELECT * FROM patients WHERE _id = 1;
     public static final String GET_PATIENT_BY_ID = "SELECT * FROM " + TABLE_PATIENTS + " WHERE " + COLUMN_PATIENT_ID
@@ -136,7 +146,15 @@ public class Datasource {
             + " = ?";
 
     // UPDATE Patients SET address = 'Chennai' WHERE roll_num = 10;
+<<<<<<< HEAD
     public static final String UPDATE_PATIENT_BY_ID = "UPDATE " + TABLE_PATIENTS + " SET "
+=======
+    public static final String UPDATE_PATIENT_BY_ID = "UPDATE " + TABLE_PATIENTS + " SET " 
+            // + COLUMN_PATIENT_NAME + " = ?, " 
+            // + COLUMN_PATIENT_ADDRESS + " = ?, " 
+            // + COLUMN_PATIENT_FATHER_NAME + " = ?, "
+            // + COLUMN_PATIENT_MOTHER_NAME + " = ? WHERE " 
+>>>>>>> 67117836d2a97fe10036dc06ddffb442394d1e9d
             + COLUMN_PATIENT_NAME + " = ?, "
             + COLUMN_PATIENT_UHID + " = ?, "
             + COLUMN_PATIENT_AGE + " = ?, "
@@ -153,7 +171,10 @@ public class Datasource {
             + COLUMN_PATIENT_POST_PCI + " = ? WHERE "
 
             + COLUMN_PATIENT_ID + " = ?";
+<<<<<<< HEAD
 
+=======
+>>>>>>> 67117836d2a97fe10036dc06ddffb442394d1e9d
 
     private Connection conn;
 
@@ -299,8 +320,13 @@ public class Datasource {
     }
 
     public int insertPatient(String name, String UHID, int age, String sex, String riskFactors,
+<<<<<<< HEAD
                              String otherComorbidities, String cad, String treatmentForPastCad, String echo, String currentDiagnosis,
                              String coronaryAngiography, String pci, String complicationsInHospitalPredischarge, String postPci)
+=======
+            String otherComorbidities, String cad, String treatmentForPastCad, String echo, String currentDiagnosis,
+            String coronaryAngiography, String pci, String complicationsInHospitalPredischarge, String postPci)
+>>>>>>> 67117836d2a97fe10036dc06ddffb442394d1e9d
             throws SQLException {
 
         insertPatient.setString(1, name);
@@ -351,6 +377,7 @@ public class Datasource {
     public boolean updatePatient(Patient patient) {
         try {
             updatePatientById.setString(1, patient.getName());
+<<<<<<< HEAD
             updatePatientById.setString(1, patient.getName());
             updatePatientById.setString(2, patient.getUHID());
             updatePatientById.setInt(3, patient.getAge());
@@ -366,6 +393,8 @@ public class Datasource {
             updatePatientById.setString(13, patient.getComplicationsInHospitalPredischarge());
             updatePatientById.setString(14, patient.getPostPci());
             updatePatientById.setInt(15, patient.getId());
+=======
+>>>>>>> 67117836d2a97fe10036dc06ddffb442394d1e9d
             int affectedRows = updatePatientById.executeUpdate();
 
             if (affectedRows != 1) {

@@ -1,6 +1,19 @@
 package hospital.java.controllers;
 
+<<<<<<< HEAD
 import hospital.java.models.User;
+=======
+import java.io.IOException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+
+>>>>>>> 67117836d2a97fe10036dc06ddffb442394d1e9d
 import hospital.java.sources.Auth;
 import hospital.java.sources.Datasource;
 import javafx.fxml.FXML;
@@ -44,14 +57,18 @@ public class RegisterController {
             e.printStackTrace();
         }
         
-        User user = null;
+        // User user = null;
         try {
-            user = Datasource.instance.register(email_field.getText().trim(), password);
+            Datasource.instance.register(email_field.getText().trim(), password);
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
+<<<<<<< HEAD
 //        Auth.setUserData(email_field.getText().trim(), user.getId());
+=======
+        // Auth.setUserData(email_field.getText().trim(), user.getId());
+>>>>>>> 67117836d2a97fe10036dc06ddffb442394d1e9d
 
         try {
             Stage loginStage = (Stage) nav_login_btn.getScene().getWindow();

@@ -16,7 +16,11 @@
    <children>
       <ScrollPane fitToWidth="true" styleClass="scroll-pane_nav" VBox.vgrow="ALWAYS">
          <content>
+<<<<<<< HEAD
             <GridPane alignment="CENTER" hgap="40.0" minHeight="-Infinity" minWidth="-Infinity" prefWidth="620.0" styleClass="v-box_right" vgap="40.0">
+=======
+            <GridPane alignment="CENTER" hgap="40.0" minHeight="-Infinity" minWidth="-Infinity" prefWidth="623.0" styleClass="v-box_right" vgap="40.0">
+>>>>>>> 67117836d2a97fe10036dc06ddffb442394d1e9d
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="330.0" minWidth="297.0" prefWidth="297.6" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="298.0" minWidth="270.0" prefWidth="283.6" />
@@ -89,6 +93,7 @@
                      <children>
                         <Label styleClass="text-field_label" text="Treatment for past CAD" />
                         <ComboBox fx:id="treatmentForPastCadBox" maxWidth="1.7976931348623157E308" />
+<<<<<<< HEAD
                      </children>
                   </VBox>
                   <VBox layoutX="347.0" layoutY="273.0" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="4">
@@ -123,6 +128,42 @@
                   </VBox>
                   <VBox layoutX="10.0" layoutY="483.0" prefHeight="200.0" prefWidth="286.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                      <children>
+=======
+                     </children>
+                  </VBox>
+                  <VBox layoutX="347.0" layoutY="273.0" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="4">
+                     <children>
+                        <Label styleClass="text-field_label" text="Echo" />
+                        <ComboBox fx:id="echoBox" maxWidth="1.7976931348623157E308" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="343.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <children>
+                        <Label styleClass="text-field_label" text="Current diagnosis" />
+                        <ComboBox fx:id="currentDiagnosisBox" maxWidth="1.7976931348623157E308" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="347.0" layoutY="343.0" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="5">
+                     <children>
+                        <Label styleClass="text-field_label" text="Coronary Angiography" />
+                        <ComboBox fx:id="coronaryAngiographyBox" maxWidth="1.7976931348623157E308" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="413.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                     <children>
+                        <Label styleClass="text-field_label" text="PCI" />
+                        <ComboBox fx:id="pciBox" maxWidth="1.7976931348623157E308" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="347.0" layoutY="413.0" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="6">
+                     <children>
+                        <Label styleClass="text-field_label" text="Complications in hospital Predischarge" />
+                        <ComboBox fx:id="complicationsPredischargeBox" maxWidth="1.7976931348623157E308" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="483.0" prefHeight="200.0" prefWidth="286.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                     <children>
+>>>>>>> 67117836d2a97fe10036dc06ddffb442394d1e9d
                         <Label styleClass="text-field_label" text="Post PCI" />
                         <ComboBox fx:id="postPciBox" maxWidth="1.7976931348623157E308" prefWidth="286.0" />
                      </children>

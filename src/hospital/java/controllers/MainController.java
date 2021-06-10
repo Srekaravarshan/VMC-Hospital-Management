@@ -1,5 +1,6 @@
 package hospital.java.controllers;
 
+import hospital.java.repositories.patient_repository.PatientRepository;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,6 +16,8 @@ public class MainController {
 
     @FXML
     private BorderPane navPane;
+
+    PatientRepository patientRepository = new PatientRepository();
 
     public void initialize() {
         AllPatientsController.listPatients();
@@ -67,6 +70,28 @@ public class MainController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+
+    @FXML
+    private void addPatient() {
+        FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/hospital/resources/views/allPatients.fxml"));
+        AllPatientsController controller = loader.getController();
+        controller.showAddPatientDialog();
+    }
+
+    @FXML
+    private void editPatient () {
+        FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/hospital/resources/views/allPatients.fxml"));
+        AllPatientsController controller = loader.getController();
+        controller.editPatient();
+    }
+
+    @FXML
+    private void deletePatient() {
+        FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/hospital/resources/views/allPatients.fxml"));
+        AllPatientsController controller = loader.getController();
+        controller.deletePatient();
     }
 
 }

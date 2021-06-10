@@ -1,11 +1,27 @@
+.root {
+    -fx-font-family: "Open Sans";
+}
+
+.menu-bar {
+    -fx-background-color: #93cb5c ;
+}
+.menu-bar .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+
+}
+.menu-item .label{
+    -fx-text-fill: black;
+    -fx-font-weight: normal;
+}
+.menu-item:focused .label{
+    -fx-text-fill: white;
+}
+
 .nav_btn {
 	-fx-background-color: #fdfdfd;
 	-fx-text-fill: #06051f;
 }
-/* 
-.nav_btn:last-child {
-    -fx-border-bottom: none;
-} */
 
 .v-box_right,
 .scroll-pane_nav {
@@ -146,4 +162,73 @@
 .table-view .column-header .filler,
 .table-view .column-header-background .filler {
     -fx-background-color: white;
+}
+
+.flash_msg {
+    -fx-background-color: #93cb5c;
+    -fx-border-radius: 10px;
+}
+.combo-box .list-cell 
+{
+    -fx-background: white;
+    -fx-background-color: rgb(241, 241, 241);
+    -fx-text-fill: -fx-text-base-color;
+    -fx-padding: 3 0 2 7;
+    -fx-cell-size: 1.66667em; 
+}
+
+/* .combo-box-popup .list-view 
+{
+    -fx-background-color: white, white;
+    -fx-background-insets: 0, 1;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 8, 0.0 , 0 , 0 );
+}     */
+
+.combo-box-popup .list-view .list-cell 
+{
+    /* -fx-padding: 4 0 4 5; */
+
+    /* No alternate highlighting */
+    -fx-background-color: white;
+}
+
+.combo-box-popup .list-view .list-cell:filled:selected, .combo-box-popup .list-view .list-cell:filled:selected:hover 
+{
+    -fx-background: #93cb5c;
+    -fx-background-color: #93cb5c;
+    -fx-text-fill: -fx-selection-bar-text;
+}
+/* 
+.combo-box-popup .list-view .list-cell:filled:hover 
+{
+    -fx-background-color: white;
+    -fx-text-fill: -fx-text-inner-color;
+} */
+
+.combo-box-base  
+{
+	-fx-background-color: rgb(241, 241, 241), rgb(241, 241, 241), rgb(241, 241, 241), rgb(241, 241, 241);
+    /* -fx-background-radius: 5, 5, 4, 3;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-padding: 0; */
+}
+
+.combo-box-base:hover
+{
+    -fx-color: -fx-hover-base;
+}
+/* 
+.combo-box-base:showing 
+{
+    -fx-color: -fx-pressed-base;
+} */
+
+.combo-box-base:focused {
+    -fx-background-color: -fx-focus-color, rgb(241, 241, 241), rgb(241, 241, 241), rgb(241, 241, 241);
+    -fx-background-radius: 6.4, 4, 5, 3;
+    -fx-background-insets: -1.4, 0, 1, 2;
+}
+
+.combo-box-base:disabled {
+    -fx-opacity: .4;
 }

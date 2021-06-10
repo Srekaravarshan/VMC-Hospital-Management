@@ -6,6 +6,7 @@ module Hospital.Management {
     requires java.sql;
     requires java.desktop;
     requires javafx.web;
+    requires com.mysql.jdbc;
 
     exports hospital.java.models;
     exports hospital.java.controllers;

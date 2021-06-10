@@ -6,21 +6,21 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="800.0" styleClass="v-box_right" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.java.controllers.FormController">
    <children>
       <ScrollPane fitToWidth="true" styleClass="scroll-pane_nav" VBox.vgrow="ALWAYS">
          <content>
-<<<<<<< HEAD
             <GridPane alignment="CENTER" hgap="40.0" minHeight="-Infinity" minWidth="-Infinity" prefWidth="620.0" styleClass="v-box_right" vgap="40.0">
-=======
-            <GridPane alignment="CENTER" hgap="40.0" minHeight="-Infinity" minWidth="-Infinity" prefWidth="623.0" styleClass="v-box_right" vgap="40.0">
->>>>>>> 67117836d2a97fe10036dc06ddffb442394d1e9d
+
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="330.0" minWidth="297.0" prefWidth="297.6" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="298.0" minWidth="270.0" prefWidth="283.6" />
@@ -65,16 +65,16 @@
                         <TextField fx:id="ageField" promptText="Eg. 18" />
                      </children>
                   </VBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
-                     <children>
-                        <Label styleClass="text-field_label" text="Risk Factors" />
-                        <ComboBox fx:id="riskFactorsBox" maxWidth="1.7976931348623157E308" />
-                     </children>
-                  </VBox>
                   <VBox layoutX="10.0" layoutY="129.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
                         <Label styleClass="text-field_label" text="Sex" />
                         <TextField fx:id="sexField" promptText="Eg. Male" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
+                     <children>
+                        <Label styleClass="text-field_label" text="Risk Factors" />
+                        <ComboBox fx:id="riskFactorsBox" maxWidth="1.7976931348623157E308" />
                      </children>
                   </VBox>
                   <VBox layoutX="10.0" layoutY="203.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
@@ -93,7 +93,6 @@
                      <children>
                         <Label styleClass="text-field_label" text="Treatment for past CAD" />
                         <ComboBox fx:id="treatmentForPastCadBox" maxWidth="1.7976931348623157E308" />
-<<<<<<< HEAD
                      </children>
                   </VBox>
                   <VBox layoutX="347.0" layoutY="273.0" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="4">
@@ -128,42 +127,6 @@
                   </VBox>
                   <VBox layoutX="10.0" layoutY="483.0" prefHeight="200.0" prefWidth="286.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                      <children>
-=======
-                     </children>
-                  </VBox>
-                  <VBox layoutX="347.0" layoutY="273.0" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="4">
-                     <children>
-                        <Label styleClass="text-field_label" text="Echo" />
-                        <ComboBox fx:id="echoBox" maxWidth="1.7976931348623157E308" />
-                     </children>
-                  </VBox>
-                  <VBox layoutX="10.0" layoutY="343.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                     <children>
-                        <Label styleClass="text-field_label" text="Current diagnosis" />
-                        <ComboBox fx:id="currentDiagnosisBox" maxWidth="1.7976931348623157E308" />
-                     </children>
-                  </VBox>
-                  <VBox layoutX="347.0" layoutY="343.0" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="5">
-                     <children>
-                        <Label styleClass="text-field_label" text="Coronary Angiography" />
-                        <ComboBox fx:id="coronaryAngiographyBox" maxWidth="1.7976931348623157E308" />
-                     </children>
-                  </VBox>
-                  <VBox layoutX="10.0" layoutY="413.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                     <children>
-                        <Label styleClass="text-field_label" text="PCI" />
-                        <ComboBox fx:id="pciBox" maxWidth="1.7976931348623157E308" />
-                     </children>
-                  </VBox>
-                  <VBox layoutX="347.0" layoutY="413.0" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="6">
-                     <children>
-                        <Label styleClass="text-field_label" text="Complications in hospital Predischarge" />
-                        <ComboBox fx:id="complicationsPredischargeBox" maxWidth="1.7976931348623157E308" />
-                     </children>
-                  </VBox>
-                  <VBox layoutX="10.0" layoutY="483.0" prefHeight="200.0" prefWidth="286.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
-                     <children>
->>>>>>> 67117836d2a97fe10036dc06ddffb442394d1e9d
                         <Label styleClass="text-field_label" text="Post PCI" />
                         <ComboBox fx:id="postPciBox" maxWidth="1.7976931348623157E308" prefWidth="286.0" />
                      </children>
@@ -175,27 +138,45 @@
             </GridPane>
          </content>
       </ScrollPane>
-      <HBox alignment="CENTER_LEFT" maxWidth="620.0">
+      <StackPane>
          <children>
-            <Label styleClass="heading" text="Add Patient">
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </Label>
-            <HBox HBox.hgrow="ALWAYS" />
-            <Button mnemonicParsing="false" onAction="#printDatabase" prefHeight="30.0" prefWidth="80.0" styleClass="secondary_btn" text="Print">
-               <HBox.margin>
-                  <Insets right="15.0" />
-               </HBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#saveDatabase" prefHeight="30.0" prefWidth="80.0" styleClass="primary_btn" text="Save">
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin></Button>
+            <AnchorPane maxWidth="620.0">
+               <children>
+                  <AnchorPane fx:id="flash_msg" prefHeight="50.0" prefWidth="620.0" styleClass="flash_msg">
+                     <children>
+                        <Label layoutX="15.199999809265137" layoutY="15.199999809265137" text="Successfully Saved">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <HBox alignment="CENTER_LEFT" maxWidth="620.0" minWidth="620.0" styleClass="v-box_right">
+                     <children>
+                        <Label styleClass="heading" text="Add Patient">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                        <HBox HBox.hgrow="ALWAYS" />
+                        <Button mnemonicParsing="false" onAction="#printDatabase" prefHeight="30.0" prefWidth="80.0" styleClass="secondary_btn" text="Print">
+                           <HBox.margin>
+                              <Insets right="15.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#saveDatabase" prefHeight="30.0" prefWidth="80.0" styleClass="primary_btn" text="Save">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                     <padding>
+                        <Insets bottom="20.0" top="20.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </AnchorPane>
          </children>
-         <padding>
-            <Insets bottom="20.0" top="20.0" />
-         </padding>
-      </HBox>
+      </StackPane>
    </children>
 </VBox>

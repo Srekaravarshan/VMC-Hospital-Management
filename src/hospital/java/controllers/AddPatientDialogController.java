@@ -12,7 +12,6 @@ public class AddPatientDialogController {
     @FXML
     private TextField nameField, uhidField, ageField, sexField;
     @FXML
-<<<<<<< HEAD
     private ComboBox<String>
             riskFactorsBox,
             otherComorbiditiesBox,
@@ -26,34 +25,6 @@ public class AddPatientDialogController {
             postPciBox;
     @FXML
     private Label nameError, uhidError;
-
-    public void initialize() {
-        riskFactorsBox.getItems().addAll(DropdownData.riskFactorsList);
-        otherComorbiditiesBox.getItems().addAll(DropdownData.otherComorbiditiesList);
-        pastCadBox.getItems().addAll(DropdownData.pastCadList);
-        treatmentForPastCadBox.getItems().addAll(DropdownData.treatmentForPastCadList);
-        echoBox.getItems().addAll(DropdownData.echoList);
-        currentDiagnosisBox.getItems().addAll(DropdownData.currentDiagnosisList);
-        coronaryAngiographyBox.getItems().addAll(DropdownData.coronaryAngiographyList);
-        pciBox.getItems().addAll(DropdownData.pciList);
-        complicationsPredischargeBox.getItems().addAll(DropdownData.complicationsPredischargeList);
-        postPciBox.getItems().addAll(DropdownData.postPsiList);
-    }
-=======
-    private ComboBox<String> 
-            riskFactorsBox, 
-            otherComorbiditiesBox, 
-            pastCadBox, 
-            treatmentForPastCadBox, 
-            echoBox, 
-            currentDiagnosisBox, 
-            coronaryAngiographyBox, 
-            pciBox, 
-            complicationsPredischargeBox, 
-            postPciBox;
-    @FXML
-    private Label nameError, uhidError;
->>>>>>> 67117836d2a97fe10036dc06ddffb442394d1e9d
 
     public void initialize() {
         riskFactorsBox.getItems().addAll(DropdownData.riskFactorsList);

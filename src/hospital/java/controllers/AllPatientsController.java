@@ -29,6 +29,10 @@ public class AllPatientsController {
     @FXML
     private ContextMenu listContextMenu;
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 84610caf0a857f9de85099c754aeb1ee18480cef
     public ListView<Patient> getPatientList () {
         return patientList;
     }
@@ -37,6 +41,11 @@ public class AllPatientsController {
         return patientDetails;
     }
 
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 0fb1a35a8d899d110356ec7e4a9a5ae2369808dc
+>>>>>>> 84610caf0a857f9de85099c754aeb1ee18480cef
     PatientRepository patientRepository = new PatientRepository();
 
     private FilteredList<Patient> filteredList;

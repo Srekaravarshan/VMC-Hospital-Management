@@ -1,5 +1,7 @@
 package hospital.java.controllers;
 
+import java.io.IOException;
+
 import hospital.java.models.Patient;
 import hospital.java.repositories.patient_repository.PatientRepository;
 import hospital.java.sources.Datasource;
@@ -106,9 +108,24 @@ public Patient processResults() {
     private void printDatabase() {
         if (validate()) {
             Patient patient = processResults();
+<<<<<<< HEAD
             // patientRepository.printPatientDetails(patient);
             System.out.println(Patient.getDetailsString(patient));
             patientRepository.printPatientDetails(patient.toList());
+=======
+<<<<<<< HEAD
+            // patientRepository.printPatientDetails(patient);
+            System.out.println(Patient.getDetailsString(patient));
+            try {
+                patientRepository.printHtmlPage();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+=======
+            patientRepository.printPatientDetails(patient);
+>>>>>>> 0fb1a35a8d899d110356ec7e4a9a5ae2369808dc
+>>>>>>> 84610caf0a857f9de85099c754aeb1ee18480cef
         }
     }
 

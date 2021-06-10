@@ -1,6 +1,9 @@
 package hospital.java.controllers;
 
+import java.io.IOException;
+
 import hospital.java.models.Patient;
+import hospital.java.repositories.patient_repository.PatientRepository;
 import hospital.java.sources.Datasource;
 import hospital.java.sources.DropdownData;
 import javafx.concurrent.Task;
@@ -8,24 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-
-import javax.print.*;
-import java.io.*;
-<<<<<<< HEAD
-=======
-import javax.print.DocPrintJob;
-import javax.print.PrintException;
-import javax.print.PrintServiceLookup;
-import javax.print.Doc;
-import javax.print.DocFlavor;
-import javax.print.PrintService;
-import javax.print.SimpleDoc;
-
-import hospital.java.models.Patient;
-import hospital.java.sources.Datasource;
-import hospital.java.sources.DropdownData;
-import javafx.concurrent.Task;
->>>>>>> 67117836d2a97fe10036dc06ddffb442394d1e9d
+import javafx.scene.layout.AnchorPane;
 
 public class FormController {
 
@@ -36,6 +22,10 @@ public class FormController {
             currentDiagnosisBox, coronaryAngiographyBox, pciBox, complicationsPredischargeBox, postPciBox;
     @FXML
     private Label nameError, uhidError;
+    @FXML
+    private AnchorPane flash_msg;
+
+    PatientRepository patientRepository = new PatientRepository();
 
     public void initialize() {
         riskFactorsBox.getItems().addAll(DropdownData.riskFactorsList);
@@ -48,7 +38,6 @@ public class FormController {
         pciBox.getItems().addAll(DropdownData.pciList);
         complicationsPredischargeBox.getItems().addAll(DropdownData.complicationsPredischargeList);
         postPciBox.getItems().addAll(DropdownData.postPsiList);
-<<<<<<< HEAD
     }
 
 
@@ -77,7 +66,7 @@ public Patient processResults() {
     Patient patient = new Patient();
     patient.setName(name);
     patient.setUHID(uhid);
-    patient.setAge(Integer.valueOf(age));
+    patient.setAge(Integer.parseInt(age));
     patient.setSex(sex);
     patient.setRiskFactors(riskFactors);
     patient.setOtherComorbidities(otherComorbidities);
@@ -92,48 +81,6 @@ public Patient processResults() {
 
     return patient;
 }
-=======
-    }
-
-    public void setData(Patient patient) {
-        this.nameField.setText(patient.getName());
-    }
-
-    public Patient processResults() {
-        String name = nameField.getText().trim();
-        String uhid = uhidField.getText().trim();
-        String age = ageField.getText().trim();
-        String sex = sexField.getText().trim();
-        String riskFactors = riskFactorsBox.getSelectionModel().getSelectedItem();
-        String otherComorbidities = otherComorbiditiesBox.getSelectionModel().getSelectedItem();
-        String pastCad = pastCadBox.getSelectionModel().getSelectedItem();
-        String treatmentForPastCad = treatmentForPastCadBox.getSelectionModel().getSelectedItem();
-        String echo = echoBox.getSelectionModel().getSelectedItem();
-        String currentDiagnosis = currentDiagnosisBox.getSelectionModel().getSelectedItem();
-        String coronaryAngiography = coronaryAngiographyBox.getSelectionModel().getSelectedItem();
-        String pci = pciBox.getSelectionModel().getSelectedItem();
-        String complicationsPredischarge = complicationsPredischargeBox.getSelectionModel().getSelectedItem();
-        String postPci = postPciBox.getSelectionModel().getSelectedItem();
-
-        Patient patient = new Patient();
-        patient.setName(name);
-        patient.setUHID(uhid);
-        patient.setAge(Integer.valueOf(age));
-        patient.setSex(sex);
-        patient.setRiskFactors(riskFactors);
-        patient.setOtherComorbidities(otherComorbidities);
-        patient.setCad(pastCad);
-        patient.setTreatmentForPastCad(treatmentForPastCad);
-        patient.setEcho(echo);
-        patient.setCurrentDiagnosis(currentDiagnosis);
-        patient.setCoronaryAngiography(coronaryAngiography);
-        patient.setPci(pci);
-        patient.setComplicationsInHospitalPredischarge(complicationsPredischarge);
-        patient.setPostPci(postPci);
-        
-        return patient;
-    }
->>>>>>> 67117836d2a97fe10036dc06ddffb442394d1e9d
 
     public boolean validate() {
         boolean isValid = true;
@@ -160,22 +107,13 @@ public Patient processResults() {
     @FXML
     private void printDatabase() {
         if (validate()) {
-            try (BufferedWriter locFile = new BufferedWriter(new FileWriter("document.doc"))) {
-
-                Patient patient = processResults();
-                locFile.write(Patient.getDetailsString(patient));
-
-                PrintJobWatcher pjDone = new PrintJobWatcher();
-                InputStream is = new BufferedInputStream(new FileInputStream("document.doc"));
-                PrintService service = PrintServiceLookup.lookupDefaultPrintService();
-                DocPrintJob job = service.createPrintJob();
-                Doc doc = new SimpleDoc(is, DocFlavor.INPUT_STREAM.AUTOSENSE, null);
-                job.addPrintJobListener(pjDone);
-                job.print(doc, null);
-
+            Patient patient = processResults();
+            // patientRepository.printPatientDetails(patient);
+            System.out.println(Patient.getDetailsString(patient));
+            try {
+                patientRepository.printHtmlPage();
             } catch (IOException e) {
-                e.printStackTrace();
-            } catch (PrintException e) {
+                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
@@ -199,8 +137,30 @@ public Patient processResults() {
                 }
             };
 
+
+//            TranslateTransition openNav=new TranslateTransition(new Duration(350), flash_msg);
+//            openNav.setToY(-50);
+//            TranslateTransition closeNav=new TranslateTransition(new Duration(350), flash_msg);
+
             task.setOnSucceeded(e -> {
                 Datasource.getPatients().add(patient);
+//                openNav.play();
+//                System.out.println("bplay");
+//                flash_msg.setLayoutY(-50);
+//                System.out.println("aplay");
+//                Platform.runLater(() -> {
+//                    try {
+//                        Thread.sleep(2000);
+//                    } catch (InterruptedException interruptedException) {
+//                        interruptedException.printStackTrace();
+//                        flash_msg.setLayoutY(0);
+//                    }
+//                    flash_msg.setLayoutY(0);
+////                    closeNav.setToY(0);
+////                System.out.println("bplay");
+////                    closeNav.play();
+////                System.out.println("aplay");
+//                });
             });
 
             new Thread(task).start();

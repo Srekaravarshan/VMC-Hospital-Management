@@ -16,7 +16,6 @@ public class Patient {
     private String pci;
     private String complicationsInHospitalPredischarge;
     private String postPci;
-<<<<<<< HEAD
 
     public static String getDetailsString(Patient patient) {
         return "<h1>" + patient.getName() + "</h1>"
@@ -50,47 +49,6 @@ public class Patient {
 
     public void setName(String name) {
         this.name = name;
-=======
-    
-    public static String getDetailsString(Patient patient) {
-        return patient.getName()
-            + "\n\nUHID: " + patient.getUHID()
-            + "\n\nAge: " + patient.getAge()
-            + "\n\nSex: " + patient.getSex()
-            + "\n\nRisk Factors: " + patient.getRiskFactors()
-            + "\n\nOther Comorbidities: " + patient.getOtherComorbidities()
-            + "\n\nPast h/o CAD: " + patient.getCad()
-            + "\n\nTreatment For Past CAD: " + patient.getTreatmentForPastCad()
-            + "\n\nEcho: " + patient.getEcho()
-            + "\n\nCurrent Diagnosis: " + patient.getCurrentDiagnosis()
-            + "\n\nCoronary Angiography: " + patient.getCoronaryAngiography()
-            + "\n\nPCI: " + patient.getPci()
-            + "\n\nComplications In Hospital Predischarge: " + patient.getComplicationsInHospitalPredischarge()
-            + "\n\nPost PCI: " + patient.getPostPci();
-            
-    }
-
-    public String getPostPci() {
-        return postPci;
-    }
-    public String getEcho() {
-        return echo;
-    }
-    public void setEcho(String echo) {
-        this.echo = echo;
-    }
-    public String getCad() {
-        return cad;
-    }
-    public void setCad(String cad) {
-        this.cad = cad;
-    }
-    public String getSex() {
-        return sex;
-    }
-    public void setSex(String sex) {
-        this.sex = sex;
->>>>>>> 67117836d2a97fe10036dc06ddffb442394d1e9d
     }
 
     public String getUHID() {
@@ -128,7 +86,6 @@ public class Patient {
     public String getOtherComorbidities() {
         return otherComorbidities;
     }
-<<<<<<< HEAD
 
     public void setOtherComorbidities(String otherComorbidities) {
         this.otherComorbidities = otherComorbidities;
@@ -194,68 +151,6 @@ public class Patient {
         return postPci;
     }
 
-=======
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public String getUHID() {
-        return UHID;
-    }
-    public void setUHID(String uHID) {
-        this.UHID = uHID;
-    }
-    public int getAge() {
-        return age;
-    }
-    public void setAge(int age) {
-        this.age = age;
-    }
-    public String getRiskFactors() {
-        return riskFactors;
-    }
-    public void setRiskFactors(String riskFactors) {
-        this.riskFactors = riskFactors;
-    }
-    public String getOtherComorbidities() {
-        return otherComorbidities;
-    }
-    public void setOtherComorbidities(String otherComorbidities) {
-        this.otherComorbidities = otherComorbidities;
-    }
-    public String getTreatmentForPastCad() {
-        return treatmentForPastCad;
-    }
-    public void setTreatmentForPastCad(String treatmentForPastCad) {
-        this.treatmentForPastCad = treatmentForPastCad;
-    }
-    public String getCurrentDiagnosis() {
-        return currentDiagnosis;
-    }
-    public void setCurrentDiagnosis(String currentDiagnosis) {
-        this.currentDiagnosis = currentDiagnosis;
-    }
-    public String getCoronaryAngiography() {
-        return coronaryAngiography;
-    }
-    public void setCoronaryAngiography(String coronaryAngiography) {
-        this.coronaryAngiography = coronaryAngiography;
-    }
-    public String getPci() {
-        return pci;
-    }
-    public void setPci(String pci) {
-        this.pci = pci;
-    }
-    public String getComplicationsInHospitalPredischarge() {
-        return complicationsInHospitalPredischarge;
-    }
-    public void setComplicationsInHospitalPredischarge(String complicationsInHospitalPredischarge) {
-        this.complicationsInHospitalPredischarge = complicationsInHospitalPredischarge;
-    }
->>>>>>> 67117836d2a97fe10036dc06ddffb442394d1e9d
     public void setPostPci(String postPci) {
         this.postPci = postPci;
     }

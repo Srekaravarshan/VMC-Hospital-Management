@@ -108,6 +108,7 @@ public Patient processResults() {
     private void printDatabase() {
         if (validate()) {
             Patient patient = processResults();
+<<<<<<< HEAD
             // patientRepository.printPatientDetails(patient);
             System.out.println(Patient.getDetailsString(patient));
             try {
@@ -116,6 +117,9 @@ public Patient processResults() {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
+=======
+            patientRepository.printPatientDetails(patient);
+>>>>>>> 0fb1a35a8d899d110356ec7e4a9a5ae2369808dc
         }
     }
 

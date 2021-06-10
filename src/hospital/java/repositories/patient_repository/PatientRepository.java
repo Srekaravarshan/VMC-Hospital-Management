@@ -2,7 +2,10 @@ package hospital.java.repositories.patient_repository;
 
 import hospital.java.controllers.AddPatientDialogController;
 import hospital.java.helpers.PrintJobWatcher;
+<<<<<<< HEAD
 import hospital.java.helpers.PrintableEditorPane;
+=======
+>>>>>>> 0fb1a35a8d899d110356ec7e4a9a5ae2369808dc
 import hospital.java.models.Patient;
 import hospital.java.models.PatientData;
 import hospital.java.sources.Datasource;
@@ -22,8 +25,11 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.Optional;
 
+<<<<<<< HEAD
 import java.awt.print.*;
 
+=======
+>>>>>>> 0fb1a35a8d899d110356ec7e4a9a5ae2369808dc
 public class PatientRepository implements BasePatientRepository {
     @Override
     public void addPatientWithDialog(Window window, URL url, ListView<Patient> patientList) {
@@ -260,6 +266,7 @@ public class PatientRepository implements BasePatientRepository {
             e.printStackTrace();
         }
     }
+<<<<<<< HEAD
 
     public void printHtmlPage () throws IOException {
         PrintableEditorPane jEditorPane = new PrintableEditorPane();
@@ -281,4 +288,6 @@ public class PatientRepository implements BasePatientRepository {
         }
     }
 
+=======
+>>>>>>> 0fb1a35a8d899d110356ec7e4a9a5ae2369808dc
 }

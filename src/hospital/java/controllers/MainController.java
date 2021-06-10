@@ -21,6 +21,8 @@ public class MainController {
 
     PatientRepository patientRepository = new PatientRepository();
 
+    PatientRepository patientRepository = new PatientRepository();
+
     public void initialize() {
         editPatientMI.setDisable(true);
         deletePatientMI.setDisable(true);
@@ -81,6 +83,7 @@ public class MainController {
         }
     }
 
+<<<<<<< HEAD
     @FXML
     private void addPatient() {
         // FXMLLoader loader = new
@@ -105,10 +108,26 @@ public class MainController {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+=======
+
+    @FXML
+    private void addPatient() {
+        FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/hospital/resources/views/allPatients.fxml"));
+        AllPatientsController controller = loader.getController();
+        controller.showAddPatientDialog();
+    }
+
+    @FXML
+    private void editPatient () {
+        FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/hospital/resources/views/allPatients.fxml"));
+        AllPatientsController controller = loader.getController();
+        controller.editPatient();
+>>>>>>> 0fb1a35a8d899d110356ec7e4a9a5ae2369808dc
     }
 
     @FXML
     private void deletePatient() {
+<<<<<<< HEAD
         try {
             FXMLLoader loader = new FXMLLoader(
                     MainController.class.getResource("/hospital/resources/views/allPatients.fxml"));
@@ -119,6 +138,11 @@ public class MainController {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+=======
+        FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/hospital/resources/views/allPatients.fxml"));
+        AllPatientsController controller = loader.getController();
+        controller.deletePatient();
+>>>>>>> 0fb1a35a8d899d110356ec7e4a9a5ae2369808dc
     }
 
 }

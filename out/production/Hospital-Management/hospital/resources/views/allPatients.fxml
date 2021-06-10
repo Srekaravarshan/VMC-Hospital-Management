@@ -28,24 +28,13 @@
    <center>
       <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="v-box_right">
          <children>
-            <HBox alignment="CENTER_LEFT">
+            <HBox alignment="CENTER_RIGHT">
                <children>
                   <Button maxWidth="Infinity" onAction="#showAddPatientDialog" prefHeight="30.0" prefWidth="120.0" styleClass="add-edit_btn" text="Add Patient">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button maxWidth="Infinity" onAction="#editPatient" prefWidth="120.0" styleClass="add-edit_btn" text="Edit Details">
-                     <HBox.margin>
-                        <Insets right="10.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button maxWidth="Infinity" onAction="#deletePatient" prefWidth="120.0" styleClass="remove_btn" text="Remove Patient">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Button>
-                  <HBox HBox.hgrow="ALWAYS" />
                   <Button maxWidth="Infinity" onAction="#printDatabase" prefHeight="26.0" prefWidth="120.0" styleClass="primary_btn" text="Print">
                      <HBox.margin>
                         <Insets />

@@ -5,6 +5,7 @@ import hospital.java.helpers.PrintJobWatcher;
 import hospital.java.models.Patient;
 import hospital.java.models.PatientData;
 import hospital.java.sources.Datasource;
+import hospital.java.sources.DropdownData;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -12,9 +13,14 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.util.Units;
+import org.apache.poi.xwpf.usermodel.*;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.*;
 
 import javax.print.*;
 import java.io.*;
+import java.math.BigInteger;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -241,20 +247,70 @@ public class PatientRepository implements BasePatientRepository {
     }
 
     @Override
-    public void printPatientDetails(Patient patient) {
-        try (BufferedWriter locFile = new BufferedWriter(new FileWriter("document.doc"))) {
-            locFile.write(Patient.getDetailsString(patient));
+    public void printPatientDetails(ArrayList<String> patient) {
 
-            PrintJobWatcher pjDone = new PrintJobWatcher();
-            InputStream is = new BufferedInputStream(new FileInputStream("document.doc"));
-            PrintService service = PrintServiceLookup.lookupDefaultPrintService();
-            DocPrintJob job = service.createPrintJob();
-            Doc doc = new SimpleDoc(is, DocFlavor.INPUT_STREAM.AUTOSENSE, null);
-            job.addPrintJobListener(pjDone);
-            job.print(doc, null);
+        XWPFDocument doc = new XWPFDocument();
+        CTSectPr sectPr = doc.getDocument().getBody().addNewSectPr();
+        CTPageMar pageMar = sectPr.addNewPgMar();
+        pageMar.setTop(BigInteger.valueOf(500L));
+        pageMar.setBottom(BigInteger.valueOf(0L));
+        try {
+            XWPFParagraph title = doc.createParagraph();
+            title.setAlignment(ParagraphAlignment.CENTER);
+            XWPFRun run = title.createRun();
 
-        } catch (IOException | PrintException e) {
+            String imgFile = System.getProperty("user.dir") + "/src/hospital/resources/images/clg-logo.png";
+            FileInputStream is;
+            is = new FileInputStream(imgFile);
+            run.addPicture(is, XWPFDocument.PICTURE_TYPE_JPEG, imgFile, Units.toEMU(450), Units.toEMU(90)); // 200x200 pixels
+            run.addBreak();
+            run.addBreak();
+            is.close();
+
+            XWPFTable tab = doc.createTable();
+
+            CTTblWidth width = tab.getCTTbl().addNewTblPr().addNewTblW();
+            width.setType(STTblWidth.DXA);
+            width.setW(BigInteger.valueOf(9072));
+
+            tab.setInsideHBorder(XWPFTable.XWPFBorderType.NIL, 0, 0, "ffffff");
+            tab.setInsideVBorder(XWPFTable.XWPFBorderType.NIL, 0, 0, "ffffff");
+
+            tab.getCTTbl().getTblPr().getTblBorders().getLeft().setVal(STBorder.NONE);
+            tab.getCTTbl().getTblPr().getTblBorders().getRight().setVal(STBorder.NONE);
+            tab.getCTTbl().getTblPr().getTblBorders().getTop().setVal(STBorder.NONE);
+            tab.getCTTbl().getTblPr().getTblBorders().getBottom().setVal(STBorder.NONE);
+
+            XWPFTableRow row;
+
+            try (OutputStream os = new FileOutputStream("document.docx")) {
+
+                for (int i = 0; i < DropdownData.titles.size(); i++) {
+
+                    row = tab.insertNewTableRow(i); // Second Row
+                    row.setHeight(800);
+
+                    XWPFRun rowRun = row.addNewTableCell().addParagraph().createRun();
+                    row.getCell(0).removeParagraph(0);
+                    rowRun.setBold(true);
+                    rowRun.setText(DropdownData.titles.get(i));
+
+                    rowRun = row.addNewTableCell().addParagraph().createRun();
+                    row.getCell(1).removeParagraph(0);
+                    rowRun.setBold(false);
+                    rowRun.setFontSize(12);
+                    rowRun.setText(patient.get(i));
+
+                }
+
+                doc.write(os);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        } catch (InvalidFormatException | IOException e) {
             e.printStackTrace();
         }
     }
+
 }

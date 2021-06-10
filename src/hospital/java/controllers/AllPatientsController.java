@@ -29,6 +29,14 @@ public class AllPatientsController {
     @FXML
     private ContextMenu listContextMenu;
 
+    public ListView<Patient> getPatientList () {
+        return patientList;
+    }
+
+    public TableView<PatientData> getPatientDetails () {
+        return patientDetails;
+    }
+
     PatientRepository patientRepository = new PatientRepository();
 
     private FilteredList<Patient> filteredList;
@@ -145,7 +153,7 @@ public class AllPatientsController {
 
     @FXML
     private void printDatabase() {
-        patientRepository.printPatientDetails(patientList.getSelectionModel().getSelectedItem());
+        patientRepository.printPatientDetails(patientList.getSelectionModel().getSelectedItem().toList());
     }
 }
 

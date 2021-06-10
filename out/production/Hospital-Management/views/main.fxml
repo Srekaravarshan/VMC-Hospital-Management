@@ -26,8 +26,8 @@
             <Menu mnemonicParsing="false" text="Edit">
               <items>
                 <MenuItem mnemonicParsing="false" text="Add patient" onAction="#addPatient"/>
-                  <MenuItem mnemonicParsing="false" text="Edit selected patient" onAction="#editPatient" />
-                  <MenuItem mnemonicParsing="false" text="Delete selected patient" onAction="#deletePatient"/>
+                  <MenuItem mnemonicParsing="false" fx:id="editPatientMI" text="Edit selected patient" onAction="#editPatient" />
+                  <MenuItem mnemonicParsing="false" fx:id="deletePatientMI" text="Delete selected patient" onAction="#deletePatient"/>
               </items>
             </Menu>
         </menus>

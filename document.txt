@@ -1,0 +1,10 @@
+<h1>Elon</h1>
+<br /><b>UHID: </b>98723434623<br /><b>Age: </b>23<br /><b>Sex: </b>Male<br /><b
+	>Risk Factors: </b
+>Hypertension<br /><b>Other Comorbidities: </b>CVA/Carotid artery stenosis<br /><b
+	>Past h/o CAD: </b
+>USA<br /><b>Treatment For Past CAD: </b>CABG<br /><b>Echo: </b>Valve
+findings<br /><b>Current Diagnosis: </b>USA<br /><b>Coronary Angiography: </b
+>Vitals<br /><b>PCI: </b>Vitals<br /><b
+	>Complications In Hospital Predischarge: </b
+>Death<br /><b>Post PCI: </b>Trop I/CKMB

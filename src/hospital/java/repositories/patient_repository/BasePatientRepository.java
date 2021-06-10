@@ -7,11 +7,12 @@ import javafx.scene.control.TableView;
 import javafx.stage.Window;
 
 import java.net.URL;
+import java.util.ArrayList;
 
 public interface BasePatientRepository {
     void addPatientWithDialog(Window window, URL url, ListView<Patient> patientList);
     void editPatient (Window window, URL url, ListView<Patient> patientList, TableView<PatientData> patientDetails);
     void deletePatient (ListView<Patient> patientList);
     void printAllPatientDetails ();
-    void printPatientDetails (Patient patient);
+    void printPatientDetails (ArrayList<String> patient);
 }

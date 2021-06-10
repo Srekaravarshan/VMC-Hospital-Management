@@ -5,6 +5,12 @@ import java.util.Arrays;
 
 public class DropdownData {
 
+    public static ArrayList<String> titles = new ArrayList<>(Arrays.asList(
+            "Name", "UHID", "Age", "Sex", "Risk Factors", "Other Comorbidities",
+            "Past h/o CAD", "Treatment for past CAD", "Echo", "Current Diagnosis", "Coronary Angiography",
+            "PCI", "Complications In hospital Predischarge", "Post PCI"
+    ));
+
     public static ArrayList<String> riskFactorsList = new ArrayList<>(Arrays.asList("Hypertension", "Diabetes Mellitus",
             "Dyslipidemia", "Smoking", "Family h/o of premature CAD"));
 

@@ -1,5 +1,8 @@
 package hospital.java.models;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Patient {
     private int id;
     private String name;
@@ -33,6 +36,25 @@ public class Patient {
                 + "<br><b>Complications In Hospital Predischarge: </b>" + patient.getComplicationsInHospitalPredischarge()
                 + "<br><b>Post PCI: </b>" + patient.getPostPci();
 
+    }
+
+    public ArrayList<String> toList() {
+        return new ArrayList<>(Arrays.asList(
+                name,
+                UHID,
+                String.valueOf(age),
+                sex,
+                riskFactors,
+                otherComorbidities,
+                cad,
+                treatmentForPastCad,
+                echo,
+                currentDiagnosis,
+                coronaryAngiography,
+                pci,
+                complicationsInHospitalPredischarge,
+                postPci
+        ));
     }
 
     public int getId() {

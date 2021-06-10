@@ -106,7 +106,9 @@ public Patient processResults() {
     private void printDatabase() {
         if (validate()) {
             Patient patient = processResults();
-            patientRepository.printPatientDetails(patient);
+            // patientRepository.printPatientDetails(patient);
+            System.out.println(Patient.getDetailsString(patient));
+            patientRepository.printPatientDetails(patient.toList());
         }
     }
 

@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -63,12 +62,20 @@
                      <children>
                         <Label styleClass="text-field_label" text="Age" />
                         <TextField fx:id="ageField" promptText="Eg. 18" />
+                        <Label fx:id="ageError" styleClass="error-text">
+                           <VBox.margin>
+                              <Insets left="10.0" />
+                           </VBox.margin></Label>
                      </children>
                   </VBox>
                   <VBox layoutX="10.0" layoutY="129.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
                         <Label styleClass="text-field_label" text="Sex" />
                         <TextField fx:id="sexField" promptText="Eg. Male" />
+                        <Label fx:id="sexError" styleClass="error-text">
+                           <VBox.margin>
+                              <Insets left="10.0" />
+                           </VBox.margin></Label>
                      </children>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
@@ -138,45 +145,41 @@
             </GridPane>
          </content>
       </ScrollPane>
-      <StackPane>
+      <AnchorPane maxWidth="620.0">
          <children>
-            <AnchorPane maxWidth="620.0">
+            <AnchorPane fx:id="flash_msg" prefHeight="50.0" prefWidth="620.0" styleClass="flash_msg">
                <children>
-                  <AnchorPane fx:id="flash_msg" prefHeight="50.0" prefWidth="620.0" styleClass="flash_msg">
-                     <children>
-                        <Label layoutX="15.199999809265137" layoutY="15.199999809265137" text="Successfully Saved">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </AnchorPane>
-                  <HBox alignment="CENTER_LEFT" maxWidth="620.0" minWidth="620.0" styleClass="v-box_right">
-                     <children>
-                        <Label styleClass="heading" text="Add Patient">
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Label>
-                        <HBox HBox.hgrow="ALWAYS" />
-                        <Button mnemonicParsing="false" onAction="#printDatabase" prefHeight="30.0" prefWidth="80.0" styleClass="secondary_btn" text="Print">
-                           <HBox.margin>
-                              <Insets right="15.0" />
-                           </HBox.margin>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#saveDatabase" prefHeight="30.0" prefWidth="80.0" styleClass="primary_btn" text="Save">
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Button>
-                     </children>
-                     <padding>
-                        <Insets bottom="20.0" top="20.0" />
-                     </padding>
-                  </HBox>
+                  <Label fx:id="flash_msg_label" layoutX="15.199999809265137" layoutY="15.199999809265137" text="Successfully Saved">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
+            <HBox alignment="CENTER_LEFT" maxWidth="620.0" minWidth="620.0" styleClass="v-box_right">
+               <children>
+                  <Label styleClass="heading" text="Add Patient">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+                  <HBox HBox.hgrow="ALWAYS" />
+                  <Button mnemonicParsing="false" onAction="#printDatabase" prefHeight="30.0" prefWidth="80.0" styleClass="secondary_btn" text="Print">
+                     <HBox.margin>
+                        <Insets right="15.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#saveDatabase" prefHeight="30.0" prefWidth="80.0" styleClass="primary_btn" text="Save">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" top="20.0" />
+               </padding>
+            </HBox>
          </children>
-      </StackPane>
+      </AnchorPane>
    </children>
 </VBox>

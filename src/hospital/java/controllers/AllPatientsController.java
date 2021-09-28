@@ -4,6 +4,7 @@ import hospital.java.models.Patient;
 import hospital.java.models.PatientData;
 import hospital.java.repositories.patient_repository.PatientRepository;
 import hospital.java.sources.Datasource;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -11,12 +12,22 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
+import java.awt.print.PrinterException;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.function.Predicate;
 
 public class AllPatientsController {
 
+    PatientRepository patientRepository = new PatientRepository();
     @FXML
     private BorderPane mainBorderPane;
     @FXML
@@ -25,30 +36,24 @@ public class AllPatientsController {
     private TextField searchField;
     @FXML
     private TableView<PatientData> patientDetails;
-
     @FXML
     private ContextMenu listContextMenu;
+    @FXML
+    private AnchorPane flash_msg;
+    private FilteredList<Patient> filteredList;
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 84610caf0a857f9de85099c754aeb1ee18480cef
-    public ListView<Patient> getPatientList () {
+    public static void listPatients() {
+        GetAllPatientsTask task = new GetAllPatientsTask();
+        new Thread(task).start();
+    }
+
+    public ListView<Patient> getPatientList() {
         return patientList;
     }
 
-    public TableView<PatientData> getPatientDetails () {
+    public TableView<PatientData> getPatientDetails() {
         return patientDetails;
     }
-
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 0fb1a35a8d899d110356ec7e4a9a5ae2369808dc
->>>>>>> 84610caf0a857f9de85099c754aeb1ee18480cef
-    PatientRepository patientRepository = new PatientRepository();
-
-    private FilteredList<Patient> filteredList;
 
     private Predicate<Patient> filterPredicate(String searchText) {
         return patient -> {
@@ -59,15 +64,21 @@ public class AllPatientsController {
     }
 
     private boolean searchFindOrder(Patient patient, String searchText) {
-        return patient.getName().toLowerCase().contains(searchText.toLowerCase());
+        return (patient.getName().toLowerCase().contains(searchText.toLowerCase()) ||
+                (patient.getUHID().toLowerCase().contains(searchText.toLowerCase())) ||
+                (patient.toString().contains(searchText.toLowerCase())) ||
+                (Datasource.getCags().get(patient.getId()).toString().contains(searchText.toLowerCase())) ||
+                (Datasource.getPcis().get(patient.getId()).toString().contains(searchText.toLowerCase())));
     }
 
     public void initialize() {
 
         TableColumn<PatientData, String> column1 = new TableColumn<>("Title");
         column1.setCellValueFactory(new PropertyValueFactory<>("title"));
+        column1.setPrefWidth(250);
         TableColumn<PatientData, String> column2 = new TableColumn<>("Detail");
         column2.setCellValueFactory(new PropertyValueFactory<>("detail"));
+        column2.setPrefWidth(500);
 
         patientDetails.getColumns().add(column1);
         patientDetails.getColumns().add(column2);
@@ -83,7 +94,22 @@ public class AllPatientsController {
         patientList.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             if (newValue != null && patientList.getSelectionModel().getSelectedItem() != null) {
                 Patient patient = patientList.getSelectionModel().getSelectedItem();
-                patientRepository.updateTableRow(patient, patientDetails);
+
+//                HashMap<String, ArrayList<String>> keyValue = patient.getsKeys();
+
+                ArrayList<String> values = new ArrayList<>();
+                values.addAll(patient.getValues());
+                values.addAll(Datasource.getCags().get(patient.getId()).getValues(false));
+                values.addAll(Datasource.getPcis().get(patient.getId()).getValues(false));
+
+                ArrayList<String> keys = new ArrayList<>();
+                keys.addAll(patient.getKeys());
+                keys.addAll(Datasource.getCags().get(patient.getId()).getKeys(false));
+                keys.addAll(Datasource.getPcis().get(patient.getId()).getKeys(false));
+
+                patientRepository.updateTableRow(values, keys, patientDetails, patient.getValues().size());
+            } else {
+                patientRepository.updateTableRow(null, null, patientDetails, 0);
             }
         });
 
@@ -92,7 +118,7 @@ public class AllPatientsController {
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredList.setPredicate(filterPredicate(newValue));
             if (filteredList.isEmpty()) {
-                patientRepository.updateTableRow(null, null);
+                patientRepository.updateTableRow(null, null, null, 0);
             } else {
                 patientList.getSelectionModel().selectFirst();
             }
@@ -129,46 +155,200 @@ public class AllPatientsController {
 
     }
 
-    public static void listPatients() {
-        GetAllPatientsTask task = new GetAllPatientsTask();
-        new Thread(task).start();
-    }
-
-    @FXML
-    public void showAddPatientDialog() {
-        patientRepository.addPatientWithDialog(mainBorderPane.getScene().getWindow(),
-                AllPatientsController.class.getResource("/hospital/resources/views/addPatientDialog.fxml"),
-                patientList);
-    }
-
     @FXML
     void deletePatient() {
-        patientRepository.deletePatient(patientList);
+        patientRepository.deletePatient(patientList, null);
     }
 
     @FXML
     void editPatient() {
-        patientRepository.editPatient(mainBorderPane.getScene().getWindow(),
-                AllPatientsController.class.getResource("/hospital/resources/views/addPatientDialog.fxml"),
-                patientList, patientDetails);
+
+        try {
+            patientRepository.editPatient(mainBorderPane.getScene().getWindow(),
+                    AllPatientsController.class.getResource("/hospital/resources/views/form.fxml"),
+                    patientList, patientDetails, null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
-    private void listKeyPressed() {
+    private void listKeyPressed(KeyEvent keyEvent) {
         Patient patient = patientList.getSelectionModel().getSelectedItem();
-        patientRepository.updateTableRow(patient, patientDetails);
+        if (patient != null) {
 
+            ArrayList<String> values = new ArrayList<>(patient.getValues());
+            values.addAll(Datasource.getCags().get(patient.getId()).getValues(false));
+            values.addAll(Datasource.getPcis().get(patient.getId()).getValues(false));
+
+            ArrayList<String> keys = new ArrayList<>();
+            keys.addAll(patient.getKeys());
+            keys.addAll(Datasource.getCags().get(patient.getId()).getKeys(false));
+            keys.addAll(Datasource.getPcis().get(patient.getId()).getKeys(false));
+
+            patientRepository.updateTableRow(values, keys, patientDetails, patient.getValues().size());
+            if (keyEvent.getCode().equals(KeyCode.DELETE)) {
+                patientRepository.deletePatient(patientList, null);
+            }
+        }
     }
 
     @FXML
     private void printDatabase() {
-        patientRepository.printPatientDetails(patientList.getSelectionModel().getSelectedItem().toList());
+        Platform.runLater(() -> {
+            flashMessage();
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                closeFlashMessage();
+            }
+        });
+
+        new Thread(() -> {
+            Patient patient = patientList.getSelectionModel().getSelectedItem();
+            patientRepository.printAllDetails(patient, Datasource.getCags().get(patient.getId()), Datasource.getPcis().get(patient.getId()));
+
+        }).start();
     }
+
+    @FXML
+    private void printPage1() {
+
+        Patient patient = patientList.getSelectionModel().getSelectedItem();
+
+        ArrayList<String> values = new ArrayList<>(patient.getPrintValues());
+
+        ArrayList<String> keys = new ArrayList<>(patient.getPrintKeys());
+
+        try {
+            if (!patientRepository.customPrintDialog(values, keys, mainBorderPane.getScene().getWindow(), null, null)) {
+                return;
+            }
+
+            new Thread(() -> {
+                flashMessage();
+                try {
+                    Thread.sleep(2000);
+                    closeFlashMessage();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    closeFlashMessage();
+                }
+            }).start();
+//            new Thread (() -> {
+            patientRepository.printPatientDetails(patient, keys, values, "PATIENT DETAILS", false, 1, patient.getDate(), null, null);
+        } catch (InvalidFormatException | IOException | PrinterException e) {
+            e.printStackTrace();
+        }
+
+
+//            }).start();
+    }
+
+    @FXML
+    private void printPage3() {
+
+        Patient patient = patientList.getSelectionModel().getSelectedItem();
+
+        ArrayList<String> values = new ArrayList<>();
+        values.add(patient.getName());
+        values.add(patient.getUHID());
+        values.add(String.valueOf(patient.getAge()));
+        values.add(patient.getSex());
+        values.add(patient.getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+        values.addAll(Datasource.getPcis().get(patient.getId()).getValues(true));
+
+        ArrayList<String> keys = new ArrayList<>();
+        keys.add("Name");
+        keys.add("UHID");
+        keys.add("Age");
+        keys.add("Sex");
+        keys.add("Date");
+        keys.addAll(Datasource.getPcis().get(patient.getId()).getKeys(true));
+
+        try {
+            if (!patientRepository.customPrintDialog(values, keys, mainBorderPane.getScene().getWindow(), null, null)) {
+                return;
+            }
+
+//            new Thread(() -> {
+            flashMessage();
+            try {
+                Thread.sleep(2000);
+                closeFlashMessage();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                closeFlashMessage();
+            }
+//            }).start();
+            patientRepository.printPatientDetails(patient, Datasource.getPcis().get(patient.getId()).getKeys(true), Datasource.getPcis().get(patient.getId()).getValues(true), "ANGIOPLASTY NOTE", true, 3, Datasource.getPcis().get(patient.getId()).getDateOfProcedure(), null, Datasource.getPcis().get(patient.getId()));
+        } catch (InvalidFormatException | IOException | PrinterException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void printPage2() {
+
+        Patient patient = patientList.getSelectionModel().getSelectedItem();
+
+        ArrayList<String> values = new ArrayList<>();
+        values.add(patient.getName());
+        values.add(patient.getUHID());
+        values.add(String.valueOf(patient.getAge()));
+        values.add(patient.getSex());
+        values.add(patient.getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+        values.addAll(Datasource.getCags().get(patient.getId()).getValues(true));
+
+        ArrayList<String> keys = new ArrayList<>();
+        keys.add("Name");
+        keys.add("UHID");
+        keys.add("Age");
+        keys.add("Sex");
+        keys.add("Date");
+        keys.addAll(Datasource.getCags().get(patient.getId()).getKeys(true));
+
+        try {
+            if (!patientRepository.customPrintDialog(values, keys, mainBorderPane.getScene().getWindow(), null, null)) {
+                return;
+            }
+
+            flashMessage();
+            try {
+                Thread.sleep(2000);
+                closeFlashMessage();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                closeFlashMessage();
+            }
+            patientRepository.printPatientDetails(patient, Datasource.getCags().get(patient.getId()).getKeys(true), Datasource.getCags().get(patient.getId()).getValues(true), "CARDIAC CATHETERIZATION AND CORONARY ANGIOGRAM REPORT", true, 2, Datasource.getCags().get(patient.getId()).getDateOfProcedure(), Datasource.getCags().get(patient.getId()), null);
+        } catch (InvalidFormatException | IOException | PrinterException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    public void flashMessage() {
+        flash_msg.setVisible(true);
+    }
+
+    public void closeFlashMessage() {
+        flash_msg.setVisible(false);
+    }
+
 }
 
 class GetAllPatientsTask extends Task<ObservableList<Patient>> {
     @Override
     protected ObservableList<Patient> call() {
-        return FXCollections.observableArrayList(Datasource.instance.queryPatients());
+        try {
+            return FXCollections.observableArrayList(Datasource.instance.queryPatients());
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return FXCollections.observableArrayList();
+        }
     }
 }

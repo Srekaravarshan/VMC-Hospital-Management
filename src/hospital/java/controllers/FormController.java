@@ -1,180 +1,223 @@
 package hospital.java.controllers;
 
-import java.io.IOException;
-
+import hospital.java.models.CagModel;
 import hospital.java.models.Patient;
+import hospital.java.models.PciModel;
 import hospital.java.repositories.patient_repository.PatientRepository;
 import hospital.java.sources.Datasource;
-import hospital.java.sources.DropdownData;
-import javafx.concurrent.Task;
+import hospital.java.sources.PageSource;
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.util.Duration;
+
+import java.io.IOException;
+import java.sql.SQLException;
 
 public class FormController {
 
-    @FXML
-    private TextField nameField, uhidField, ageField, sexField;
-    @FXML
-    private ComboBox<String> riskFactorsBox, otherComorbiditiesBox, pastCadBox, treatmentForPastCadBox, echoBox,
-            currentDiagnosisBox, coronaryAngiographyBox, pciBox, complicationsPredischargeBox, postPciBox;
-    @FXML
-    private Label nameError, uhidError;
-    @FXML
-    private AnchorPane flash_msg;
-
+    PageSource pageSource = PageSource.form.isEditing() ? PageSource.editForm : PageSource.form;
     PatientRepository patientRepository = new PatientRepository();
+    @FXML
+    private BorderPane addPatientPane;
+    @FXML
+    private Button formSaveBtn, formPrintButton, page1, page2, page3;
 
     public void initialize() {
-        riskFactorsBox.getItems().addAll(DropdownData.riskFactorsList);
-        otherComorbiditiesBox.getItems().addAll(DropdownData.otherComorbiditiesList);
-        pastCadBox.getItems().addAll(DropdownData.pastCadList);
-        treatmentForPastCadBox.getItems().addAll(DropdownData.treatmentForPastCadList);
-        echoBox.getItems().addAll(DropdownData.echoList);
-        currentDiagnosisBox.getItems().addAll(DropdownData.currentDiagnosisList);
-        coronaryAngiographyBox.getItems().addAll(DropdownData.coronaryAngiographyList);
-        pciBox.getItems().addAll(DropdownData.pciList);
-        complicationsPredischargeBox.getItems().addAll(DropdownData.complicationsPredischargeList);
-        postPciBox.getItems().addAll(DropdownData.postPsiList);
-    }
 
-
-//    public void setData(Patient patient) {
-//        this.nameField.setText(patient.getName());
-//        this.addressField.setText(patient.getAddress());
-//        this.fatherNameField.setText(patient.getFatherName());
-//        this.motherNameField.setText(patient.getMotherName());
-//    }
-public Patient processResults() {
-    String name = nameField.getText().trim();
-    String uhid = uhidField.getText().trim();
-    String age = ageField.getText().trim();
-    String sex = sexField.getText().trim();
-    String riskFactors = riskFactorsBox.getSelectionModel().getSelectedItem();
-    String otherComorbidities = otherComorbiditiesBox.getSelectionModel().getSelectedItem();
-    String pastCad = pastCadBox.getSelectionModel().getSelectedItem();
-    String treatmentForPastCad = treatmentForPastCadBox.getSelectionModel().getSelectedItem();
-    String echo = echoBox.getSelectionModel().getSelectedItem();
-    String currentDiagnosis = currentDiagnosisBox.getSelectionModel().getSelectedItem();
-    String coronaryAngiography = coronaryAngiographyBox.getSelectionModel().getSelectedItem();
-    String pci = pciBox.getSelectionModel().getSelectedItem();
-    String complicationsPredischarge = complicationsPredischargeBox.getSelectionModel().getSelectedItem();
-    String postPci = postPciBox.getSelectionModel().getSelectedItem();
-
-    Patient patient = new Patient();
-    patient.setName(name);
-    patient.setUHID(uhid);
-    patient.setAge(Integer.parseInt(age));
-    patient.setSex(sex);
-    patient.setRiskFactors(riskFactors);
-    patient.setOtherComorbidities(otherComorbidities);
-    patient.setCad(pastCad);
-    patient.setTreatmentForPastCad(treatmentForPastCad);
-    patient.setEcho(echo);
-    patient.setCurrentDiagnosis(currentDiagnosis);
-    patient.setCoronaryAngiography(coronaryAngiography);
-    patient.setPci(pci);
-    patient.setComplicationsInHospitalPredischarge(complicationsPredischarge);
-    patient.setPostPci(postPci);
-
-    return patient;
-}
-
-    public boolean validate() {
-        boolean isValid = true;
-        nameError.setVisible(false);
-        uhidError.setVisible(false);
-        if (this.nameField.getText().trim().length() < 3) {
-            nameError.setText("Name cannot be null.");
-            nameError.setVisible(true);
-            isValid = false;
-        }
-        // if (!(Datasource.instance.isUnique())) {
-        // rollNumError.setText("Roll Number must be unique.");
-        // rollNumError.setVisible(true);
-        // isValid = false;
-        // }
-        // if (this.rollNumField.getText().isEmpty()) {
-        // rollNumError.setText("Roll Number cannot be null.");
-        // rollNumError.setVisible(true);
-        // isValid = false;
-        // }
-        return isValid;
-    }
-
-    @FXML
-    private void printDatabase() {
-        if (validate()) {
-            Patient patient = processResults();
-<<<<<<< HEAD
-            // patientRepository.printPatientDetails(patient);
-            System.out.println(Patient.getDetailsString(patient));
-            patientRepository.printPatientDetails(patient.toList());
-=======
-<<<<<<< HEAD
-            // patientRepository.printPatientDetails(patient);
-            System.out.println(Patient.getDetailsString(patient));
+        PauseTransition delay = new PauseTransition(Duration.seconds(0.5));
+        delay.setOnFinished(event -> {
+            pageSource.fxmlLoaders().add(new FXMLLoader(
+                    MainController.class.getResource("/hospital/resources/views/page1.fxml")));
+            pageSource.fxmlLoaders().add(new FXMLLoader(
+                    MainController.class.getResource("/hospital/resources/views/page2.fxml")));
+            pageSource.fxmlLoaders().add(new FXMLLoader(
+                    MainController.class.getResource("/hospital/resources/views/page3.fxml")));
             try {
-                patientRepository.printHtmlPage();
+                pageSource.pages().add(pageSource.fxmlLoaders().get(0).load());
+                pageSource.pages().add(pageSource.fxmlLoaders().get(1).load());
+                pageSource.pages().add(pageSource.fxmlLoaders().get(2).load());
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-=======
-            patientRepository.printPatientDetails(patient);
->>>>>>> 0fb1a35a8d899d110356ec7e4a9a5ae2369808dc
->>>>>>> 84610caf0a857f9de85099c754aeb1ee18480cef
+
+            pageSource.setPage1Controller(pageSource.fxmlLoaders().get(0).getController());
+            pageSource.setPage2Controller(pageSource.fxmlLoaders().get(1).getController());
+            pageSource.setPage3Controller(pageSource.fxmlLoaders().get(2).getController());
+
+            HBox hBox = new HBox();
+            hBox.setAlignment(Pos.CENTER);
+            hBox.getChildren().add(pageSource.pages().get(0));
+
+            page1.getStyleClass().add("selected_nav");
+
+            formSaveBtn.setVisible(!PageSource.form().isEditing());
+            formPrintButton.setVisible(!PageSource.form().isEditing());
+
+            addPatientPane.setCenter(pageSource.pages().get(0));
+
+            if (PageSource.form.isEditing())
+                setData(pageSource.getPatient(), pageSource.getCag(), pageSource.getPci());
+
+            page2.setVisible(false);
+            page3.setVisible(false);
+            if(pageSource.page1Controller().cagCheck!=null)
+                page3.setVisible(pageSource.page1Controller().cagCheck.isSelected());
+            if(pageSource.page1Controller().pciCheck!=null)
+                page2.setVisible(pageSource.page1Controller().pciCheck.isSelected());
+
+            pageSource.page1Controller().cagCheck.selectedProperty().addListener((observable, oldValue, newValue) -> page3.setVisible(newValue));
+            pageSource.page1Controller().pciCheck.selectedProperty().addListener((observable, oldValue, newValue) -> page2.setVisible(newValue));
+
+        });
+        delay.play();
+    }
+
+    @FXML
+    private void navPage1() {
+        if (pageSource.pageIndex() != 0) {
+            addPatientPane.setCenter(pageSource.pages().get(0));
+            pageSource.setPageIndex(0);
+
+            page1.getStyleClass().remove("selected_nav");
+            page2.getStyleClass().remove("selected_nav");
+            page3.getStyleClass().remove("selected_nav");
+
+            page1.getStyleClass().add("selected_nav");
         }
     }
 
     @FXML
-    private void saveDatabase() {
-        if (validate()) {
-            Patient patient = processResults();
+    private void navPage2() {
+        if (pageSource.pageIndex() != 1) {
+            addPatientPane.setCenter(pageSource.pages().get(1));
+            pageSource.setPageIndex(1);
 
-            Task<Boolean> task = new Task<>() {
-                @Override
-                protected Boolean call() throws Exception {
-                    int id = Datasource.instance.insertPatient(patient.getName(), patient.getUHID(), patient.getAge(),
-                            patient.getSex(), patient.getRiskFactors(), patient.getOtherComorbidities(),
-                            patient.getCad(), patient.getTreatmentForPastCad(), patient.getEcho(),
-                            patient.getCurrentDiagnosis(), patient.getCoronaryAngiography(), patient.getPci(),
-                            patient.getComplicationsInHospitalPredischarge(), patient.getPostPci());
-                    patient.setId(id);
-                    return true;
-                }
-            };
+            page1.getStyleClass().remove("selected_nav");
+            page2.getStyleClass().remove("selected_nav");
+            page3.getStyleClass().remove("selected_nav");
 
-
-//            TranslateTransition openNav=new TranslateTransition(new Duration(350), flash_msg);
-//            openNav.setToY(-50);
-//            TranslateTransition closeNav=new TranslateTransition(new Duration(350), flash_msg);
-
-            task.setOnSucceeded(e -> {
-                Datasource.getPatients().add(patient);
-//                openNav.play();
-//                System.out.println("bplay");
-//                flash_msg.setLayoutY(-50);
-//                System.out.println("aplay");
-//                Platform.runLater(() -> {
-//                    try {
-//                        Thread.sleep(2000);
-//                    } catch (InterruptedException interruptedException) {
-//                        interruptedException.printStackTrace();
-//                        flash_msg.setLayoutY(0);
-//                    }
-//                    flash_msg.setLayoutY(0);
-////                    closeNav.setToY(0);
-////                System.out.println("bplay");
-////                    closeNav.play();
-////                System.out.println("aplay");
-//                });
-            });
-
-            new Thread(task).start();
+            page2.getStyleClass().add("selected_nav");
         }
+    }
+
+    @FXML
+    private void navPage3() {
+        if (pageSource.pageIndex() != 2) {
+            addPatientPane.setCenter(pageSource.pages().get(2));
+            pageSource.setPageIndex(2);
+
+            page1.getStyleClass().remove("selected_nav");
+            page2.getStyleClass().remove("selected_nav");
+            page3.getStyleClass().remove("selected_nav");
+
+            page3.getStyleClass().addAll("selected_nav");
+        }
+    }
+
+    @FXML
+    public void save() {
+        try {
+            if (pageSource.page1Controller().validate(false)) {
+
+                Patient patient = pageSource.page1Controller().processResults();
+                CagModel cag = pageSource.page3Controller().processResults();
+                PciModel pci = pageSource.page2Controller().processResults();
+
+//                new Thread(() -> {
+                try {
+                    int id = Datasource.instance.insertPatient(patient);
+                    Datasource.instance.insertCagPci(id, cag, pci);
+
+                    patient.setId(id);
+                    cag.setId(id);
+                    cag.setId(id);
+
+                    Datasource.getPatients().add(patient);
+                    if (pageSource.pageIndex() == 0) {
+                        new Thread(() -> {
+                            pageSource.page1Controller().flashMessage();
+                            try {
+                                Thread.sleep(2000);
+                                pageSource.page1Controller().closeFlashMessage();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                                pageSource.page1Controller().closeFlashMessage();
+                            }
+                        }).start();
+                    } else if (pageSource.pageIndex() == 1) {
+                        new Thread(() -> {
+                            pageSource.page2Controller().flashMessage();
+                            try {
+                                Thread.sleep(2000);
+                                pageSource.page2Controller().closeFlashMessage();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                                pageSource.page2Controller().closeFlashMessage();
+                            }
+                        }).start();
+                    } else {
+                        new Thread(() -> {
+                            pageSource.page3Controller().flashMessage();
+                            try {
+                                Thread.sleep(2000);
+                                pageSource.page3Controller().closeFlashMessage();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                                pageSource.page3Controller().closeFlashMessage();
+                            }
+                        }).start();
+                    }
+                } catch (SQLException | IOException throwables) {
+                    throwables.printStackTrace();
+                }
+//                }).start();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void print() {
+        try {
+            if (pageSource.page1Controller().validate(true)) {
+                Patient patient = pageSource.page1Controller().processResults();
+                new Thread(() -> patientRepository.printAllDetails(patient, pageSource.page3Controller().processResults(), pageSource.page2Controller().processResults())).start();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void clearAll() {
+        pageSource.page1Controller().clear();
+        pageSource.page2Controller().clear();
+        pageSource.page3Controller().clear();
+    }
+
+    public void setData(Patient patient, CagModel cag, PciModel pci) {
+
+        pageSource.page1Controller().setData(patient);
+        pageSource.page2Controller().setData(pci);
+        pageSource.page3Controller().setData(cag);
+    }
+
+    public Patient getEditedPatient() {
+        return pageSource.page1Controller().processResults();
+    }
+
+    public CagModel getEditedCag() {
+        return pageSource.page3Controller().processResults();
+    }
+
+    public PciModel getEditedPci() {
+        return pageSource.page2Controller().processResults();
     }
 
 }

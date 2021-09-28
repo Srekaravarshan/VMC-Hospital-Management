@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="1500.0" prefWidth="700.0" styleClass="v-box_right" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.java.controllers.PageController">
+     <children>
+      <ScrollPane fitToHeight="true" fitToWidth="true" focusTraversable="false">
+         <content>
+                 <HBox alignment="CENTER" maxHeight="1.7976931348623157E308">
+                     <children>
+                         <VBox fx:id="detailsVBox" alignment="CENTER" maxWidth="580.0">
+                             <children>
+                                 <ImageView fitHeight="90.0" pickOnBounds="true" preserveRatio="true">
+                                     <image>
+                                         <Image url="@../images/clg-logo.png" />
+                                     </image>
+                                     <viewport>
+                                         <Rectangle2D />
+                                     </viewport>
+                                     <VBox.margin>
+                                         <Insets bottom="10.0" left="20.0" top="10.0" />
+                                     </VBox.margin>
+                                 </ImageView>
+                                 <VBox>
+                                     <children>
+                                         <Label styleClass="text-field_label" text="Name">
+                                             <VBox.margin>
+                                                 <Insets />
+                                             </VBox.margin>
+                                         </Label>
+                                         <TextField fx:id="nameField" promptText="Eg. Robertson" />
+                                         <Label fx:id="nameError" styleClass="error-text">
+                                             <VBox.margin>
+                                                 <Insets left="10.0" />
+                                             </VBox.margin>
+                                         </Label>
+                                     </children>
+                                     <VBox.margin>
+                                         <Insets bottom="10.0" />
+                                     </VBox.margin>
+                                 </VBox>
+                                 <VBox>
+                                     <children>
+                                         <Label styleClass="text-field_label" text="UHID" />
+                                         <TextField fx:id="uhidField" promptText="Eg. 268231020027" />
+                                         <Label fx:id="uhidError" styleClass="error-text">
+                                             <VBox.margin>
+                                                 <Insets left="10.0" />
+                                             </VBox.margin>
+                                         </Label>
+                                     </children>
+                                     <VBox.margin>
+                                         <Insets bottom="10.0" />
+                                     </VBox.margin>
+                                 </VBox>
+                                 <VBox>
+                                     <children>
+                                         <Label styleClass="text-field_label" text="Age" />
+                                         <TextField fx:id="ageField" promptText="Eg. 18" />
+                                         <Label fx:id="ageError" styleClass="error-text">
+                                             <VBox.margin>
+                                                 <Insets left="10.0" />
+                                             </VBox.margin>
+                                         </Label>
+                                     </children>
+                                     <VBox.margin>
+                                         <Insets bottom="15.0" />
+                                     </VBox.margin>
+                                 </VBox>
+                                 <VBox>
+                                     <children>
+                                         <Label styleClass="text-field_label" text="Sex" />
+                                         <ComboBox fx:id="sexField" maxWidth="1.7976931348623157E308" minHeight="33.0" prefHeight="33.0" />
+                                     </children>
+                                     <VBox.margin>
+                                         <Insets bottom="15.0" />
+                                     </VBox.margin>
+                                 </VBox>
+                        <VBox layoutX="10.0" layoutY="469.0">
+                           <children>
+                              <Label styleClass="text-field_label" text="Complaints" />
+                              <HBox>
+                                 <children>
+                                    <ComboBox fx:id="complaintsBox" prefHeight="33.0" prefWidth="250.0" />
+                                    <TextField fx:id="complaintsValue" prefWidth="250.0" styleClass="value_text">
+                                       <HBox.margin>
+                                          <Insets left="30.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                    <Button fx:id="complaintsAdd" mnemonicParsing="false" prefHeight="33.0" prefWidth="35.0" styleClass="text-field" text="+">
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+
+                            <VBox.margin>
+                                <Insets bottom="15.0" />
+                            </VBox.margin>
+                        </VBox>
+                                 <VBox>
+                                     <children>
+                                         <Label styleClass="text-field_label" text="Risk Factors" />
+                                         <HBox>
+                                             <children>
+                                                 <ComboBox fx:id="riskFactorsBox" prefHeight="33.0" prefWidth="250.0" />
+                                                 <TextField fx:id="riskFactorsValue" prefWidth="250.0" styleClass="value_text">
+                                                     <HBox.margin>
+                                                         <Insets left="30.0" />
+                                                     </HBox.margin>
+                                                 </TextField>
+                                    <Button fx:id="riskFactorsAdd" mnemonicParsing="false" prefHeight="33.0" prefWidth="35.0" styleClass="text-field" text="+">
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                             </children>
+                                         </HBox>
+                                     </children>
+                                     <VBox.margin>
+                                         <Insets bottom="15.0" />
+                                     </VBox.margin>
+                                 </VBox>
+                                 <VBox>
+                                     <children>
+                                         <Label styleClass="text-field_label" text="Other Comorbidities" />
+                                         <HBox>
+                                             <children>
+                                                 <ComboBox fx:id="otherComorbiditiesBox" maxWidth="1.7976931348623157E308" prefHeight="33.0" prefWidth="250.0" />
+                                                 <TextField fx:id="otherComorbiditiesValue" prefWidth="250.0" styleClass="value_text">
+                                                     <HBox.margin>
+                                                         <Insets left="30.0" />
+                                                     </HBox.margin>
+                                                 </TextField>
+                                    <Button fx:id="otherComorbiditiesAdd" mnemonicParsing="false" prefHeight="33.0" prefWidth="35.0" styleClass="text-field" text="+">
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                             </children>
+                                         </HBox>
+                                     </children>
+                                     <VBox.margin>
+                                         <Insets bottom="15.0" />
+                                     </VBox.margin>
+                                 </VBox>
+                                 <VBox>
+                                     <children>
+                                         <Label styleClass="text-field_label" text="Past h/o CAD" />
+                                         <HBox>
+                                             <children>
+                                                 <ComboBox fx:id="pastCadBox" maxWidth="1.7976931348623157E308" prefHeight="33.0" prefWidth="250.0" />
+                                                 <TextField fx:id="pastCadValue" prefWidth="250.0" styleClass="value_text">
+                                                     <HBox.margin>
+                                                         <Insets left="30.0" />
+                                                     </HBox.margin>
+                                                 </TextField>
+                                    <Button fx:id="pastCadAdd" mnemonicParsing="false" prefHeight="33.0" prefWidth="35.0" styleClass="text-field" text="+">
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                             </children>
+                                         </HBox>
+                                     </children>
+                                     <VBox.margin>
+                                         <Insets bottom="15.0" />
+                                     </VBox.margin>
+                                 </VBox>
+                                 <VBox>
+                                     <children>
+                                         <Label styleClass="text-field_label" text="Treatment for past CAD" />
+                                         <HBox>
+                                             <children>
+                                                 <ComboBox fx:id="treatmentForPastCadBox" maxWidth="1.7976931348623157E308" prefHeight="33.0" prefWidth="250.0" />
+                                                 <TextField fx:id="treatmentPastCadValue" prefWidth="250.0" styleClass="value_text">
+                                                     <HBox.margin>
+                                                         <Insets left="30.0" />
+                                                     </HBox.margin>
+                                                 </TextField>
+                                    <Button fx:id="treatmentPastCadAdd" mnemonicParsing="false" prefHeight="33.0" prefWidth="35.0" styleClass="text-field" text="+">
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                             </children>
+                                         </HBox>
+                                     </children>
+                                     <VBox.margin>
+                                         <Insets bottom="15.0" />
+                                     </VBox.margin>
+                                 </VBox>
+                                 <VBox>
+                                     <children>
+                                         <Label styleClass="text-field_label" text="Echo" />
+                                         <HBox>
+                                             <children>
+                                                 <ComboBox fx:id="echoBox" maxWidth="1.7976931348623157E308" prefHeight="33.0" prefWidth="250.0" />
+                                                 <TextField fx:id="echoValue" prefWidth="250.0" styleClass="value_text">
+                                                     <HBox.margin>
+                                                         <Insets left="30.0" />
+                                                     </HBox.margin>
+                                                 </TextField>
+                                    <Button fx:id="echoAdd" mnemonicParsing="false" prefHeight="33.0" prefWidth="35.0" styleClass="text-field" text="+">
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                             </children>
+                                         </HBox>
+                                     </children>
+                                     <VBox.margin>
+                                         <Insets bottom="15.0" />
+                                     </VBox.margin>
+                                 </VBox>
+                                 <VBox>
+                                     <children>
+                                         <Label styleClass="text-field_label" text="Current diagnosis" />
+                                         <HBox>
+                                             <children>
+                                                 <ComboBox fx:id="currentDiagnosisBox" prefHeight="33.0" prefWidth="250.0">
+                                                     <HBox.margin>
+                                                         <Insets />
+                                                     </HBox.margin>
+                                                 </ComboBox>
+                                                 <TextField fx:id="currentDiagnosisValue" prefWidth="250.0" styleClass="value_text">
+                                                     <HBox.margin>
+                                                         <Insets left="30.0" />
+                                                     </HBox.margin>
+                                                 </TextField>
+                                    <Button fx:id="currentDiagnosisAdd" mnemonicParsing="false" prefHeight="33.0" prefWidth="35.0" styleClass="text-field" text="+">
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                             </children>
+                                         </HBox>
+                                     </children>
+                                     <VBox.margin>
+                                         <Insets bottom="15.0" />
+                                     </VBox.margin>
+                                 </VBox>
+                                 <VBox>
+                                     <children>
+                                         <Label styleClass="text-field_label" text="Complications in hospital Predischarge" />
+                                         <HBox>
+                                             <children>
+                                                 <ComboBox fx:id="complicationsPredischargeBox" maxWidth="1.7976931348623157E308" prefHeight="33.0" prefWidth="250.0" />
+                                                 <TextField fx:id="complicationsValue" prefWidth="250.0" styleClass="value_text">
+                                                     <HBox.margin>
+                                                         <Insets left="30.0" />
+                                                     </HBox.margin>
+                                                 </TextField>
+                                    <Button fx:id="complicationsAdd" mnemonicParsing="false" prefHeight="33.0" prefWidth="35.0" styleClass="text-field" text="+">
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                             </children>
+                                         </HBox>
+                                     </children>
+                                     <VBox.margin>
+                                         <Insets bottom="15.0" />
+                                     </VBox.margin>
+                                 </VBox>
+
+                                 <VBox>
+                                     <children>
+                                         <Label styleClass="text-field_label" text="Operator" />
+                                         <ComboBox fx:id="operatorField" maxWidth="1.7976931348623157E308" minHeight="33.0" prefHeight="33.0" />
+                                     </children>
+                                     <VBox.margin>
+                                         <Insets bottom="15.0" />
+                                     </VBox.margin>
+                                 </VBox>
+                                 <VBox layoutX="10.0" layoutY="935.0">
+                                     <children>
+                                         <Label styleClass="text-field_label" text="Date of admission" />
+                                         <DatePicker fx:id="addedDate" promptText="mm/dd/yyyy" />
+                                     </children>
+                                     <VBox.margin>
+                                         <Insets bottom="20.0" />
+                                     </VBox.margin>
+                                 </VBox>
+                        <HBox>
+                           <children>
+                              <HBox alignment="CENTER_LEFT">
+                                 <children>
+                                    <Label minWidth="50.0" styleClass="text-field_label" text="CAG" />
+                                    <CheckBox fx:id="cagCheck" mnemonicParsing="false" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0">
+                                 <children>
+                                    <Label minWidth="50.0" styleClass="text-field_label" text="PCI" />
+                                    <CheckBox fx:id="pciCheck" mnemonicParsing="false" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="42.0" />
+                                 </HBox.margin>
+                              </HBox>
+                           </children>
+                        </HBox>
+                             </children>
+                         </VBox>
+                     </children>
+                 </HBox>
+         </content>
+      </ScrollPane>
+         <AnchorPane maxWidth="620.0">
+             <children>
+                 <AnchorPane fx:id="flash_msg" prefHeight="50.0" prefWidth="620.0" styleClass="flash_msg">
+                     <children>
+                         <Label fx:id="flash_msg_label" layoutX="15.199999809265137" layoutY="15.199999809265137" text="Successfully Saved">
+                             <font>
+                                 <Font size="14.0" />
+                             </font>
+                         </Label>
+                     </children>
+                 </AnchorPane>
+                 <HBox fx:id="bottomBar" alignment="CENTER_LEFT" maxWidth="620.0" minWidth="620.0" styleClass="v-box_right">
+                     <children>
+                         <HBox HBox.hgrow="ALWAYS" />
+                  <Button fx:id="addDetailBtn" mnemonicParsing="false" onAction="#clear" prefHeight="30.0" prefWidth="131.0" styleClass="add-edit_btn" text="Add detail">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                         <Button mnemonicParsing="false" onAction="#clear" prefHeight="30.0" prefWidth="80.0" styleClass="add-edit_btn" text="Clear">
+                             <HBox.margin>
+                                 <Insets right="10.0" />
+                             </HBox.margin>
+                         </Button>
+                     </children>
+                     <padding>
+                         <Insets bottom="10.0" top="10.0" />
+                     </padding>
+                 </HBox>
+             </children>
+         </AnchorPane>
+     </children>
+ </VBox>

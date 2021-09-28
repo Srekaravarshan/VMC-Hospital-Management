@@ -39,6 +39,12 @@
                   </Label>
                   <PasswordField fx:id="password_field" maxWidth="1.7976931348623157E308" />
                   <Label text="Password cannot be null" visible="false" />
+                  
+                  <Label text="" fx:id="register_error">
+                     <VBox.margin>
+                        <Insets top="20.0" bottom="20.0"/>
+                     </VBox.margin>
+                  </Label>
                   <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#register" styleClass="primary_btn" text="Register">
                      <VBox.margin>
                         <Insets top="10.0" />

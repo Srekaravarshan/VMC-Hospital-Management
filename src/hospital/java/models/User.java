@@ -4,7 +4,7 @@ public class User {
     private int id;
     private String email;
 
-    public String getemail() {
+    public String getEmail() {
         return email;
     }
     public int getId() {

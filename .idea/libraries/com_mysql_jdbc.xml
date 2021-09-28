@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="com.mysql.jdbc">
-    <CLASSES>
-      <root url="jar://$USER_HOME$/OneDrive/Documents/lib/mysql/com.mysql.jdbc.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

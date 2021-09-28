@@ -6,9 +6,12 @@ module Hospital.Management {
     requires java.sql;
     requires java.desktop;
     requires javafx.web;
-    requires com.mysql.jdbc;
-    requires poi.ooxml;
+//    requires com.mysql.jdbc;
     requires ooxml.schemas;
+    requires sqlite.jdbc;
+    requires Spire.Doc;
+    requires poi.ooxml;
+    requires opencsv;
 
     exports hospital.java.models;
     exports hospital.java.controllers;

@@ -20,7 +20,7 @@
               <MenuItem mnemonicParsing="false" onAction="#handleShowView" text="All Patients" userData="/hospital/resources/views/allPatients.fxml" />
                   <MenuItem mnemonicParsing="false" onAction="#handleShowView" text="Add Patient" userData="/hospital/resources/views/form.fxml" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Exit" />
+                  <MenuItem mnemonicParsing="false" text="Exit" onAction="#exit"/>
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Edit">

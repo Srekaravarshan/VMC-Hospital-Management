@@ -24,7 +24,7 @@
             </ImageView>
             <VBox maxWidth="300.0">
                <children>
-                  <Label text="Email" />
+                  <Label text="Username" />
                   <TextField fx:id="email_field" maxWidth="300.0" />
                   <Label text="Please enter the valid email" visible="false" />
                   <Label text="Password">
@@ -34,6 +34,12 @@
                   </Label>
                   <PasswordField fx:id="password_field" maxWidth="300.0" />
                   <Label text="Password cannot be null" visible="false" />
+                  
+                  <Label text="" fx:id="login_error">
+                     <VBox.margin>
+                        <Insets top="20.0" bottom="20.0"/>
+                     </VBox.margin>
+                  </Label>
                   <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#login" styleClass="primary_btn" text="Login">
                      <VBox.margin>
                         <Insets top="15.0" />
